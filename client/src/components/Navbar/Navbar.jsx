@@ -31,7 +31,7 @@ const Navbar = () => {
         </div>
         <div className="navbar-2">
           {User === null ? (
-            <Link to="/Auth" className="nav-item nav-links">
+            <Link to="/auth" className="nav-item nav-links">
               Log in
             </Link>
           ) : (
