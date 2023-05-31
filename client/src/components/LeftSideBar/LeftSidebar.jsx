@@ -5,13 +5,13 @@ function LeftSidebar() {
     <nav className="left-side-bar">
       <NavLink className="item" to="/"><p>PUBLIC</p></NavLink>
       <br/>
-      <NavLink className="item" to="/"><p>QUESTIONS</p></NavLink>
+      <NavLink className="item" to="/Questions"><p>QUESTIONS</p></NavLink>
       <br/>
-      <NavLink className="item" to="/"><p>HOME</p></NavLink>
+      <NavLink className="item" to="/Home"><p>HOME</p></NavLink>
       <br/>
-      <NavLink className="item" to="/"><p>TAGS</p></NavLink>
+      <NavLink className="item" to="/Tags"><p>TAGS</p></NavLink>
       <br/>
-      <NavLink className="item" to="/"><p>USERS</p></NavLink>
+      <NavLink className="item" to="/Users"><p>USERS</p></NavLink>
       </nav>
   )
 }

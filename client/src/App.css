@@ -23,3 +23,20 @@
     padding-top: 10vh;
 
 }
+
+.main-bar{
+
+    width:calc( 100% - 300px - 24px );
+    float:left;
+    margin:10px;
+    padding: 10px;
+}
+
+
+.btn{
+    background-color: #007ac6;
+    border:1px solid #007ac6;
+    color:white;
+    padding:10px;
+    text-decoration: none;
+}

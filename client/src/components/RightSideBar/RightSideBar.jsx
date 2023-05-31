@@ -2,8 +2,8 @@ import React from "react";
 
 function RightSideBar() {
   return (
-    <div style={{ float: "right", width: "300px",margin:'40px 15px 0px 25px',fontSize:'15px' }}>
-        <div style={{padding:'10px'}}>
+    <div style={{ float: "right", width: "270px",margin:'30px 10px 0px 0px',fontSize:'15px' }}>
+        <div>
             <div style={{backgroundColor:'#fbf3d5',border:'1px solid #e3e6e8',padding:'10px'}}>
         Hello World!
         </div>
@@ -18,6 +18,7 @@ function RightSideBar() {
           About Help Meta
         </div>
       </div>
+      <br/>
       <div>
         <div style={{backgroundColor:'#fbf3d5',border:'1px solid #e3e6e8',padding:'10px', display: "flex", justifyContent: "space-evenly" }}>
       The Overflow Blog
