@@ -103,7 +103,7 @@ function MainSideBar() {
                 answers
               </div>
               <div>
-              <Link to={`/question/${question.id}`}>
+              <Link to={`/Questions/${question.id}`}>
                 <p>{question.questionTitle}</p>
               </Link>
 
