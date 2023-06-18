@@ -1,16 +1,40 @@
 import React, { useState } from "react";
 import Logo from "../../assets/logo.png";
 import AboutAuth from "./AboutAuth";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { login } from "../../actions/auth";
+import { signUp } from "../../actions/auth";
+
 import "./Auth.css";
 function Auth() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch(login);
   const [isSignUp, setIsSignUp] = useState(true);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isSignUp) {
+      if (name === "" || email === "" || password === "")
+        alert("Please fill all the fields");
+      else dispatch(signUp({ name, email, password }, navigate));
+    } else {
+      if (email === "" || password === "") {
+        alert("Please fill all the fields");
+      } else {
+        dispatch(login({ email, password }, navigate));
+      }
+    }
+  };
   return (
     <section className="auth-section">
       {isSignUp && <AboutAuth />}
       <div className="auth-container">
         {/* {isSignUp && <img width="13px" src={Logo} alt="logo" />} */}
 
-        <form>
+        <form onSubmit={handleSubmit}>
           {isSignUp && (
             <label htmlFor="name">
               <h4>Display Name</h4>
@@ -18,6 +42,9 @@ function Auth() {
                 type="name"
                 id="name"
                 placeholder="name"
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
               />
             </label>
           )}
@@ -27,18 +54,32 @@ function Auth() {
               type="email"
               id="email"
               placeholder="Email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
           </label>
           <label htmlFor="password">
-            <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
-            <h4>Password </h4>
-            {!isSignUp && <h4 style={{color:'#007ac6'}}> Forgot Password?</h4>}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <h4>Password </h4>
+              {!isSignUp && (
+                <h4 style={{ color: "#007ac6" }}> Forgot Password?</h4>
+              )}
             </div>
             <input
               className="form-input"
               type="password"
               id="password"
               placeholder="Password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
           </label>
           {isSignUp && (
@@ -55,7 +96,7 @@ function Auth() {
                 type="checkbox"
                 id="checkbox"
               ></input>
-            opt-in to receive occasional updates
+              opt-in to receive occasional updates
             </label>
           )}
           <br />
@@ -73,25 +114,24 @@ function Auth() {
               <span style={{ color: "#007ac6" }}>cookie policy</span>
             </p>
           )}
-          
         </form>
         {!isSignUp ? (
-            <p>
-              Not a member?{" "}
-              <button
-                onClick={() => {
-                  setIsSignUp(true);
-                }}
-              >
-                Sign Up
-              </button>
-            </p>
-          ) : (
-            <p>
-              Already a member{" "}
-              <button onClick={() => setIsSignUp(false)}>Sign In</button>
-            </p>
-          )}
+          <p>
+            Not a member?{" "}
+            <button
+              onClick={() => {
+                setIsSignUp(true);
+              }}
+            >
+              Sign Up
+            </button>
+          </p>
+        ) : (
+          <p>
+            Already a member{" "}
+            <button onClick={() => setIsSignUp(false)}>Sign In</button>
+          </p>
+        )}
       </div>
     </section>
   );

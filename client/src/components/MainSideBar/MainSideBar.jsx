@@ -1,39 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 function MainSideBar() {
   const location = useLocation();
-  var questionList = [
-    {
-      id: 1,
-      votes: 3,
-      noOfAnswers: 4,
-      questionTitle: "What is the function?",
-      questionBody: "It menat to be",
-      questionTags: ["c", "c++", "java", "javascript", "python"],
-      userPosted: "mano",
-      time: "1 Jan",
-    },
-    {
-      id: 2,
-      votes: 3,
-      noOfAnswers: 4,
-      questionTitle: "What is the function?",
-      questionBody: "It menat to be",
-      questionTags: ["c", "c++", "java", "javascript", "python"],
-      userPosted: "mano",
-      time: "1 Jan",
-    },
-    {
-      id: 3,
-      votes: 3,
-      noOfAnswers: 4,
-      questionTitle: "What is the function?",
-      questionBody: "It menat to be",
-      questionTags: ["c", "c++", "java", "javascript", "python"],
-      userPosted: "mano",
-      time: "1 Jan",
-    },
-  ];
+  var questionList = useSelector((state) => state.question);
+  console.log(questionList);
   return (
     <div className="main-bar">
       <div
@@ -53,10 +24,18 @@ function MainSideBar() {
         </Link>
       </div>
       <div>
-        {questionList.length} Questions
-        {questionList.map((question) => {
+        {questionList?.data?.length} Questions
+        {questionList?.data?.map((question) => {
           return (
-            <div style={{ display: "flex",justifyContent:'space-between' ,backgroundColor:'#fbf3d5',border:'1px solid #e3e6e8'}} key={question.id}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                backgroundColor: "#fbf3d5",
+                border: "1px solid #e3e6e8",
+              }}
+              key={question.id}
+            >
               <div
                 style={{
                   display: "flex",
@@ -73,14 +52,18 @@ function MainSideBar() {
                     display: "flex",
                   }}
                 >
-                  {question.votes}{" "}
+                  {question.upvotes?.length-question.downvotes?.length}{" "}
                 </p>
-                <p style={{
-                  paddingLeft: "10px",
+                <p
+                  style={{
+                    paddingLeft: "10px",
                     alignContent: "center",
                     justifyContent: "center",
                     display: "flex",
-                  }}>Votes</p>
+                  }}
+                >
+                  Votes
+                </p>
               </div>
               <div
                 style={{
@@ -103,27 +86,34 @@ function MainSideBar() {
                 answers
               </div>
               <div>
-              <Link to={`/Questions/${question.id}`}>
-                <p>{question.questionTitle}</p>
-              </Link>
+                <Link to={`/Questions/${question._id}`}>
+                  <p>{question.questionTitle}</p>
+                </Link>
 
-              <div style={{  }}>
-                {question.questionTags.map((tag) => (
-                  <small
-                    style={{
-                      borderRadius: "7px",
-                      margin: "3px",
-                    }}
-                    className="btn"
-                  >
-                    {tag}
-                  </small>
-                ))}
+                <div style={{}}>
+                  {question.questionTags.map((tag) => (
+                    <small
+                      style={{
+                        borderRadius: "7px",
+                        margin: "3px",
+                      }}
+                      className="btn"
+                    >
+                      {tag}
+                    </small>
+                  ))}
+                </div>
               </div>
-              </div>
-              <div style={{ display: "flex", flexDirection: "column" ,justifyContent:'center',paddingRight:'10px'}}>
-              <p>Asked on {question.time}</p>
-              <p>{question.userPosted}</p>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  paddingRight: "10px",
+                }}
+              >
+                <p>Asked on {question.askedOn.substring(0, 10)}</p>
+                <p>{question.userPosted}</p>
               </div>
             </div>
           );

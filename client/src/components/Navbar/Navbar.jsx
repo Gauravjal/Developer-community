@@ -1,13 +1,32 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import decode from 'jwt-decode';
 import logo from "../../assets/logo.png";
 import search from "../../assets/search-solid.svg";
 import Avatar from "../../components/Avatar/Avatar";
 import "./Navbar.css";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getCurrentUser } from "../../actions/getCurrentUser";
+import {logout} from '../../actions/auth';
 const Navbar = () => {
-  var User = null;
+  var User = useSelector((state) => state.Users);
+  const dispatch = useDispatch();
+  const navigate=useNavigate();
+  const log_out=()=>{
+    dispatch(logout(navigate));
+    // dispatch(getCurrentUser(null));
+  }
+  useEffect(() => {
+    const token=User?.token;
+    if(token)
+    {
+      const decodedToken=decode(token);
+      if(decodedToken.exp*1000 < new Date.getTime())
+      log_out();
+    }
+    if(JSON.parse(localStorage.getItem("user"))?.res) dispatch(getCurrentUser(JSON.parse(localStorage.getItem("user"))?.res));
+  }, []);
+  
   return (
     <nav className="main-nav">
       <div className="navbar">
@@ -47,10 +66,10 @@ const Navbar = () => {
                   to={`/`}
                   style={{ color: "white", textDecoration: "none" }}
                 >
-                  {User.result.name.charAt(0).toUpperCase()}
+                  {User?.name?.charAt(0).toUpperCase()}
                 </Link>
               </Avatar>
-              <button className="nav-item nav-links">Log out</button>
+              <button onClick={log_out} className="nav-item nav-links">Log out</button>
             </>
           )}
         </div>

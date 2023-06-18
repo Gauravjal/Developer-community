@@ -1,0 +1,12 @@
+import express from "express";
+import { signUp } from "../controllers/auth.js";
+import { login } from "../controllers/auth.js";
+import { fetchUsers } from "../controllers/Users.js";
+import { editProfile } from "../controllers/Users.js";
+const app = express();
+const router = express.Router();
+router.post("/signUp", signUp);
+router.post("/login", login);
+router.get("/",fetchUsers);
+router.patch("/",editProfile);
+export default router;

@@ -7,7 +7,7 @@ function LeftSidebar() {
       <br/>
       <NavLink className="item" to="/Questions"><p>QUESTIONS</p></NavLink>
       <br/>
-      <NavLink className="item" to="/Home"><p>HOME</p></NavLink>
+      <NavLink className="item" to="/"><p>HOME</p></NavLink>
       <br/>
       <NavLink className="item" to="/Tags"><p>TAGS</p></NavLink>
       <br/>
