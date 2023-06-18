@@ -7,7 +7,7 @@
         "dev-client": "cd client && npm start",
         "dev-server": "cd server && npm start",
         "install": "npm run client && npm run server",
-        "setup-production": "NPM_CONFIG_PRODUCTION=false npm install --prefix server && npm install --prefix client && npm run build --prefix client && npm install"
+        "setup-production": "NPM_CONFIG_PRODUCTION=false npm install --prefix server"
     },
     "dependencies": {
         "concurrently": "^8.2.0"
