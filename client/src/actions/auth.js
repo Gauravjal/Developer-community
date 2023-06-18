@@ -5,7 +5,7 @@ import { getCurrentUser } from "./getCurrentUser";
 export const signUp = (AuthData, history) => async (dispatch) => {
   try {
     const { data } = await axios.post(
-      "http://localhost:5000/users/signUp",
+      "https://stackoverflow-clone-mfrc.onrender.com/users/signUp",
       AuthData
     );
 
@@ -21,7 +21,7 @@ export const signUp = (AuthData, history) => async (dispatch) => {
 export const login = (AuthData, history) => async (dispatch) => {
   try {
     const { data } = await axios.post(
-      "http://localhost:5000/users/login",
+      "https://stackoverflow-clone-mfrc.onrender.com/users/login",
       AuthData
     );
     dispatch({ type: "AUTH", data });
@@ -32,8 +32,8 @@ export const login = (AuthData, history) => async (dispatch) => {
   }
 };
 
-export const logout=(navigate)=>async(dispatch)=>{
-  dispatch({type:"LOG_OUT"});
+export const logout = (navigate) => async (dispatch) => {
+  dispatch({ type: "LOG_OUT" });
   dispatch(getCurrentUser(null));
   navigate("/");
-}
+};
