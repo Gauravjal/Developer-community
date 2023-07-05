@@ -10,6 +10,7 @@ import questionRoutes from "./routes/Question.js";
 import answerRoutes from "./routes/AnswerRoutes.js";
 import chatBot from "./routes/chatBot.js";
 import paymentRoutes from "./routes/payment.js";
+import communityRoutes from "./routes/Community.js";
 app.use(express.json({ limit: "50mb", extended: true }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
@@ -21,6 +22,7 @@ app.use("/questions", questionRoutes);
 app.use("/answers", answerRoutes);
 app.use("/chat", chatBot);
 app.use("/payment", paymentRoutes);
+app.use("/community", communityRoutes);
 const PORT = process.env.PORT || 5000;
 // app.listen(PORT);
 mongoose

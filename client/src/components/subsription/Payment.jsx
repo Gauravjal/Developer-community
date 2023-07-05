@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
+import { createSubscription } from "../../actions/payment";
 import {
   Elements,
   CardElement,
@@ -22,6 +25,10 @@ const App = () => {
 };
 
 function CheckoutForm() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  let { plan } = useParams();
+  var User = useSelector((state) => state.Users);
   const [isPaymentLoading, setPaymentLoading] = useState(false);
   const [clientSecret, setClientSecret] = useState();
   const stripe = useStripe();
@@ -67,7 +74,9 @@ function CheckoutForm() {
         alert(paymentResult.error.message);
       } else {
         if (paymentResult.paymentIntent.status === "succeeded") {
-          alert("Success!");
+          dispatch(createSubscription({ id: User?._id, plan: plan }));
+          navigate("/subscribe");
+          alert(plan);
         }
       }
     }
@@ -81,9 +90,10 @@ function CheckoutForm() {
     });
     setPaymentLoading(false);
     if (paymentResult.error) {
-      alert(paymentResult.error.message);
+      dispatch(createSubscription({ id: User?._id, plan: plan }));
     } else {
       if (paymentResult.paymentIntent.status === "succeeded") {
+      
         alert("Success!");
       }
     }

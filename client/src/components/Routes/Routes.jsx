@@ -12,6 +12,11 @@ import Public from "../User/Public.jsx";
 import Chat from "../Chat/Chat.jsx";
 import Payment from "../subsription/Payment.jsx";
 import Subscribe from "../subsription/Subscribe.jsx";
+import Community from "../Community/Community.jsx";
+import CommunityProfile from "../Community/Profile.jsx";
+import Explore from "../Community/Explore.jsx";
+import CreatePost from "../Community/CreatePost.jsx";
+import Comments from "../Community/Comments.jsx";
 function AllRoutes() {
   return (
     <div>
@@ -26,8 +31,13 @@ function AllRoutes() {
         <Route path="/Users/:id" element={<Public />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/chat" element={<Chat />} />
-        <Route path="/payment" element={<Payment />} />
+        <Route path="/payment/:plan" element={<Payment />} />
         <Route path="/subscribe" element={<Subscribe />} />
+        <Route path="/community" element={<Community />} />
+        <Route path="/community/profile" element={<CommunityProfile />} />
+        <Route path="/community/explore" element={<Explore />} />
+        <Route path="/community/post" element={<CreatePost />} />
+        <Route path="/community/post/:id" element={<Comments />} />
       </Routes>
     </div>
   );

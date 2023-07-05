@@ -1,5 +1,5 @@
 import { confifdfrmPayment } from "@stripe/react-stripe-js";
-
+import { getCurrentUser } from "./getCurrentUser";
 import axios from "axios";
 
 export const addCredits = (token) => async (dispatch) => {
@@ -17,8 +17,10 @@ export const addCredits = (token) => async (dispatch) => {
 
 
 export const createSubscription=(id,plan)=>async (dispatch)=>{
-  const response=await axios.post(
+  const response=await axios.patch(
     "http://localhost:5000/payment/subscription",
-    {id,plan}
+    id,plan
   );
+  console.log(response.data);
+  dispatch(getCurrentUser(response.data));
 }

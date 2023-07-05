@@ -3,21 +3,24 @@ import { BsGlobeAmericas } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 import Chat from "../Chat/Chat.jsx";
 import { AiFillRobot } from "react-icons/ai";
+import {AiFillHome} from "react-icons/ai";
+import {BsQuestionCircleFill} from "react-icons/bs";
+import {IoIosPricetags} from "react-icons/io";
+import {FaUsers} from "react-icons/fa";
+
 function LeftSidebar() {
   const [showBot, setShowBot] = useState(false);
   return (
-    <nav className="left-side-bar">
-      <NavLink style={{ textDecoration: "none" }} className="item" to="/">
-        <p>HOME</p>
+    <nav style={{position:'relative'}} className="left-side-bar">
+      <NavLink style={{ textDecoration: "none"}} className="item" to="/">
+        <h4 style={{ textAlign: "left" ,position:'relative',left:'5%'}}><AiFillHome/>HOME</h4>
       </NavLink>
-      <br />
       <NavLink style={{ textDecoration: "none" }} className="item" to="/">
-        <p style={{ textDecoration: "none", display: "flex" }}>
+        <h4 style={{ textAlign: "left" ,position:'relative',left:'5%'}}>
           <BsGlobeAmericas />
           PUBLIC
-        </p>
+        </h4>
       </NavLink>
-      <br />
       <div
         style={{
           textDecoration: "none",
@@ -31,61 +34,58 @@ function LeftSidebar() {
           className="item"
           to="/Questions"
         >
-          <p
-            style={{
-              textDecoration: "none",
-              display: "flex",
-              justifyContent: "center",
-            }}
+          <h4
+            style={{ textAlign: "left" ,position:'relative',left:'20%'}}
           >
-            QUESTIONS
-          </p>
+            <BsQuestionCircleFill/>QUESTIONS
+          </h4>
         </NavLink>
-        <br />
 
         <NavLink style={{ textDecoration: "none" }} className="item" to="/Tags">
-          <p
-            style={{
-              textDecoration: "none",
-              display: "flex",
-              justifyContent: "center",
-            }}
+          <h4
+            style={{ textAlign: "left" ,position:'relative',left:'20%'}}
           >
-            TAGS
-          </p>
+            <IoIosPricetags/>TAGS
+          </h4>
         </NavLink>
-        <br />
         <NavLink
           style={{ textDecoration: "none" }}
           className="item"
           to="/Users"
         >
-          <p
-            style={{
-              textDecoration: "none",
-              display: "flex",
-              justifyContent: "center",
-            }}
+          <h4
+            style={{ textAlign: "left" ,position:'relative',left:'20%'}}
           >
             USERS
-          </p>
+          </h4>
+        </NavLink>
+        <NavLink
+          style={{ textDecoration: "none" }}
+          className="item"
+          to="/community"
+        >
+          <h4
+           style={{ textAlign: "left" ,position:'relative',left:'20%'}}
+          >
+            <FaUsers/>COMMUNITY
+          </h4>
         </NavLink>
       </div>
       {!showBot && (
         <button
           type="submit"
           style={{
-            display:'flex',
+            display: "flex",
             position: "fixed",
-            top:'500px',
-            left:'60px',
+            top: "500px",
+            left: "60px",
             color: "black",
             fontSize: "20px",
             backgroundColor: "#ef8236",
             borderRadius: "50%",
             padding: "0px",
-            paddingLeft:'25px',
-            paddingRight:'25px',
+            paddingLeft: "25px",
+            paddingRight: "25px",
             zIndex: "9999",
           }}
           onClick={() => {

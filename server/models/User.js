@@ -10,5 +10,7 @@ const userSchema = mongoose.Schema({
   location: { type: String },
   subscription:{type:String,default:"Free"},
   joinedOn: { type: Date, default: Date.now },
+  followers: [{type:String, default:[]}],
+  following: [{type:String, default:[]}]
 });
 export default mongoose.model("User", userSchema);

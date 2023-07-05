@@ -8,6 +8,6 @@ import {createSubscription} from "../controllers/payment.js"
 router.post('/create-customer', createCustomer);
 router.post('/add-card', addNewCard);
 router.post('/create-charges',createCharges);
-router.post('/subscription',createSubscription);
+router.patch('/subscription',createSubscription);
 
 export default router;

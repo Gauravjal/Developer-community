@@ -3,6 +3,7 @@ import { ImCross } from "react-icons/im";
 import { ImCheckmark } from "react-icons/im";
 import {useSelector,useDispatch} from "react-redux"
 import {createSubscription} from "../../actions/payment"
+import {Link} from "react-router-dom"
 function Subscribe() {
     const dispatch = useDispatch();
   var User = useSelector((state) => state.Users);
@@ -31,14 +32,14 @@ function Subscribe() {
           <p>Ask a question</p>
           <h3>Free</h3>
           {User?.subscription==="Free" ? (
-          <buttton
+          <button
             style={{ marginLeft: "20%", marginRight: "20%" }}
             className="btn"
           >
             Current
-          </buttton>
+          </button>
           ):(
-            <buttton
+            <button
             onClick={()=>{
                 dispatch(createSubscription({id:User?._id,plan:"Free"}));
             }}
@@ -46,7 +47,7 @@ function Subscribe() {
             className="btn"
           >
             Downgrade
-          </buttton>
+          </button>
           )
             }
           <div
@@ -82,12 +83,23 @@ function Subscribe() {
           <h3>Silver Plan</h3>
           <p>Ask many questions</p>
           <h3>Rs 500/Mo</h3>
-          <buttton
+          {User?.subscription==="Silver" ? (
+          <button
+            style={{ marginLeft: "20%", marginRight: "20%" }}
+            className="btn"
+          >
+            Current
+          </button>
+          ):(
+            <Link to='/payment/Silver'
+            
             style={{ marginLeft: "20%", marginRight: "20%" }}
             className="btn"
           >
             Upgrade Now
-          </buttton>
+          </Link>
+          )
+            }
           <div>
             <p>
               <ImCheckmark style={{ color: "green" }} />
@@ -115,12 +127,23 @@ function Subscribe() {
           <h3>Gold Plan</h3>
           <p>Ask infinite questions</p>
           <h3>Rs 1000/Mo</h3>
-          <buttton
+          {User?.subscription==="Gold" ? (
+          <button
+            style={{ marginLeft: "20%", marginRight: "20%" }}
+            className="btn"
+          >
+            Current
+          </button>
+          ):(
+            <Link to='/payment/Gold'
+            
             style={{ marginLeft: "20%", marginRight: "20%" }}
             className="btn"
           >
             Upgrade Now
-          </buttton>
+          </Link>
+          )
+            }
           <div>
             <p>
               <ImCheckmark style={{ color: "green" }} />

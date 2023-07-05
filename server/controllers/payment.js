@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+import User from "../models/User.js";
 // const { STRIPE_PUBLISHABLE_KEY, STRIPE_SECRET_KEY } = process.env;
 const STRIPE_PUBLISHABLE_KEY =
   "pk_test_51NKyfJSFQxjCVFiCcTXe7tetEOPExyUCUqUsCdk1jQBC9bNqD8MkJq0VODeXxm0dtw4mrLvuqHc8VBMJlKqzjsUK00tZBFeDAo";
@@ -55,7 +57,7 @@ export const createCharges = async (req, res) => {
   const paymentIntent = await stripe.paymentIntents.create({
     amount: 100000,
     currency: "inr",
-    description:"payment",
+    description: "payment",
     payment_method_types: ["card"],
   });
   console.log("seccret", paymentIntent.client_secret);
@@ -64,17 +66,22 @@ export const createCharges = async (req, res) => {
   });
 };
 
-export const createSubscription=async(req,res)=>{
-  const { _id, plan } = req.body;
-try {
-  if (!mongoose.Types.ObjectId.isValid(_id)) {
-      return res.status(404).json({ message: "No user with this id" });
-    }
-  const user = await mongoose.model("User").findById(_id);
-  user.subscription=plan;
-  user.save();
-  return res.status(200).json(user);
-} catch {
-  return res.status(404).json("Unable to get users");
-}
-}
+export const createSubscription = async (req, res) => {
+  const { id, plan } = req.body;
+  // console.log(id);
+  // console.log(plan);
+  const _id = id;
+  console.log(_id);
+  try {
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+        return res.status(404).json({ message: "No user with this id" });
+      }
+    const user = await mongoose.model("User").findById(_id);
+    console.log(user);
+    user.subscription = plan;
+    user.save();
+    return res.status(200).json(user);
+  } catch {
+    return res.status(404).json("Something went wrong");
+  }
+};
