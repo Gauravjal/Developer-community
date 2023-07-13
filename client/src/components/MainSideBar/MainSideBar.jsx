@@ -1,12 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import moment from "moment";
+
 function MainSideBar() {
   const location = useLocation();
   var questionList = useSelector((state) => state.question);
   console.log(questionList);
   return (
-    <div className="main-bar">
+    <div style={{ marginLeft: "14vw", width: "75vw" }} className="main-bar">
       <div
         style={{
           display: "flex",
@@ -23,97 +25,86 @@ function MainSideBar() {
           Ask Question
         </Link>
       </div>
-      <div>
+      <div style={{ overflowY: "scroll", height: "500px", width: "100%" }}>
         {questionList?.data?.length} Questions
         {questionList?.data?.map((question) => {
           return (
             <div
               style={{
+                minHeight: "80px",
+                width: "100%",
                 display: "flex",
-                justifyContent: "space-between",
-                backgroundColor: "#fbf3d5",
-                border: "1px solid #e3e6e8",
+                alignItems: "center",
+                backgroundColor: "#fdf7e2",
+                borderBottom: "solid 1px #edeff0",
               }}
-              key={question.id}
+              className="display-question-container"
             >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  marginRight: "10px",
-                  marginTop: "10px",
-                  marginBottom: "10px",
-                }}
-              >
-                <p
-                  style={{
-                    alignContent: "center",
-                    justifyContent: "center",
-                    display: "flex",
-                  }}
-                >
-                  {question.upvotes?.length-question.downvotes?.length}{" "}
+              <div style={{ padding: "10px" }} className="display-votes-ans">
+                <p style={{ margin: "0%", textAlign: "center" }}>
+                  {question?.upvotes?.length - question?.downvotes?.length}
                 </p>
-                <p
-                  style={{
-                    paddingLeft: "10px",
-                    alignContent: "center",
-                    justifyContent: "center",
-                    display: "flex",
-                  }}
-                >
-                  Votes
+                <p style={{padding: '10px'
+}}>votes</p>
+              </div>
+              <div style={{ padding: "10px" }} className="display-votes-ans">
+                <p style={{ margin: "0%", textAlign: "center" }}>
+                  {question.noOfAnswers}
                 </p>
+                <p style={{ margin: "0%", textAlign: "center" }}>answers</p>
               </div>
               <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  marginRight: "10px",
-                  marginTop: "10px",
-                  marginBottom: "10px",
-                }}
+                style={{ flexGrow: "1", padding: "10px", margin: "0%" }}
+                className="display-question-details"
               >
-                <p
+                <Link
+                  to={`/Questions/${question._id}`}
+                  className="question-title-link"
                   style={{
-                    alignContent: "center",
-                    justifyContent: "center",
-                    display: "flex",
+                    textDecoration: "none",
+                    color: "#037ecb",
+                    transition: "0.3s",
                   }}
                 >
-                  {question.noOfAnswers}{" "}
-                </p>
-                answers
-              </div>
-              <div>
-                <Link to={`/Questions/${question._id}`}>
-                  <p>{question.questionTitle}</p>
+                  {question?.questionTitle?.length >
+                  (window.innerWidth <= 400 ? 70 : 90)
+                    ? question?.questionTitle?.substring(
+                        0,
+                        window.innerWidth <= 400 ? 70 : 90
+                      ) + "..."
+                    : question?.questionTitle}
                 </Link>
-
-                <div style={{}}>
-                  {question.questionTags.map((tag) => (
-                    <small
-                      style={{
-                        borderRadius: "7px",
-                        margin: "3px",
-                      }}
-                      className="btn"
-                    >
-                      {tag}
-                    </small>
-                  ))}
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                  className="display-tags-time"
+                >
+                  <div
+                    style={{ display: "flex", flexWrap: "wrap" }}
+                    className="display-tags"
+                  >
+                    {question?.questionTags?.map((tag) => (
+                      <p style={{margin: '2px',
+                        padding: '4px',
+                        fontSize: '13px',
+                        backgroundColor: '#edeff0',
+                        color: '#39739d'}} key={tag}>{tag}</p>
+                    ))}
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "13px",
+                    }}
+                    className="display-time"
+                  >
+                    asked {moment(question?.askedOn).fromNow()}{" "}
+                    {question?.userPosted}
+                  </p>
                 </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  paddingRight: "10px",
-                }}
-              >
-                <p>Asked on {question.askedOn.substring(0, 10)}</p>
-                <p>{question.userPosted}</p>
               </div>
             </div>
           );

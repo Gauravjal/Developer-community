@@ -6,6 +6,17 @@ import LeftSideBar from "./LeftSideBar";
 import RightSideBar from "./RightSideBar";
 import Search from "./Search";
 function Explore() {
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth <= 1000); // Set the breakpoint size according to your requirements
+    };
+
+    checkScreenSize();
+
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.post);
   useEffect(() => {
@@ -13,21 +24,44 @@ function Explore() {
     console.log(posts?.data);
   }, [dispatch]);
   return (
-
-    <div style={{display:'flex',paddingTop:'50px'}}>
-        <LeftSideBar />
-    <div style={{border:'1px solid black',borderTop:'none', display: "flex", flexDirection: "column",width:'100%' }}>
-     
-      <div style={{ display: "flex", flexDirection: "row",borderBottom:'1px solid black' }}>
-        <Search/>
+    <div style={{ display: "flex", paddingTop: "50px",backgroundColor:'#eef1f4'}}>
+      <LeftSideBar />
+      <div
+        style={{
+          border: "1px solid black",
+          borderTop: "none",
+          display: "flex",
+          flexDirection: "column",
+          width: "100%",
+          marginLeft:'17vw'
+          ,marginRight:isSmallScreen?'1vw':'24vw' 
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            borderBottom: "1px solid black",
+          }}
+        >
+          <Search />
+        </div>
+        <div
+          style={{
+            overflow: "scroll",
+            height: "80vh",
+            display: "flex",
+            flexDirection: "column",
+            padding: "10px",
+          }}
+        >
+          <h3 style={{ textAlign: "center" }}>Top Posts</h3>
+          {posts?.data?.map((post) => {
+            return <Post children={post} />;
+          })}
+        </div>
       </div>
-      {posts?.data?.map((post) => {
-        return(
-        <Post children={post}/>
-        )
-      })}
-    </div>
-    <RightSideBar />
+      <RightSideBar />
     </div>
   );
 }

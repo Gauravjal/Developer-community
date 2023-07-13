@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import './Chat.css';
-function Chatbot() {
-  const [messages, setMessages] = useState([{"text": "Hello, how can I help you?", "sender": "chatbot"}]);
+import { MdCancelPresentation } from "react-icons/md";
+import "./Chat.css";
+function Chatbot({ showBot, setShowBot }) {
+  const [messages, setMessages] = useState([
+    { text: "Hello, how can I help you?", sender: "chatbot" },
+  ]);
   const [userMessage, setUserMessage] = useState();
-
+  // const [showBot, setShowBot] = useState(true);
   const handleUserMessageChange = (e) => {
     setUserMessage(e.target.value);
   };
@@ -33,7 +36,14 @@ function Chatbot() {
   };
 
   return (
-    <div >
+    <div
+      style={{
+        display: showBot ? "auto" : "none",
+        z: "100",
+        backgroundColor: "none",
+        
+      }}
+    >
       {/* <div
         style={{
           display: "flex",
@@ -45,8 +55,11 @@ function Chatbot() {
       >
         <h2>Chatbot</h2>
       </div> */}
-      <div style={{z:'100',backgroundColor:'gray'}} className="chat-container">
-        <div className="message-list">
+      <div
+        style={{ z: "100", backgroundColor: "#fdf7e2" }}
+        className="chat-container"
+      >
+        <div style={{marginTop:'50px'}} className="message-list">
           {messages.map((message, index) => (
             <div
               key={index}
@@ -54,7 +67,7 @@ function Chatbot() {
                 message.sender === "user" ? "user-message" : "chatbot-message"
               }`}
             >
-             <p>{message.text}</p>
+              <p>{message.text}</p>
             </div>
           ))}
         </div>
@@ -64,13 +77,27 @@ function Chatbot() {
             value={userMessage}
             onChange={handleUserMessageChange}
             placeholder="Type your message..."
-            onKeyPress={(e)=>{
-                if(e.key==="Enter")
-                handleSendMessage();
+            onKeyPress={(e) => {
+              if (e.key === "Enter") handleSendMessage();
             }}
           />
           <button onClick={handleSendMessage}>Send</button>
         </div>
+
+        <MdCancelPresentation
+          style={{
+            position: "absolute",
+            top: "0px",
+            right: "0px",
+            //backgroundColor: "white",
+            color: "black",
+            padding: "5px",
+            border: "none",
+            cursor: "pointer",
+            fontSize:'30px'
+          }}
+          onClick={() => setShowBot(false)}
+        />
       </div>
     </div>
   );

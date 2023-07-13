@@ -1,14 +1,29 @@
 import mongoose from "mongoose";
 import Question from "../models/Question.js";
+import User from "../models/User.js";
 export const postQuestion = async (req, res) => {
   const questionData = req.body;
   const question = new Question({ ...questionData });
+  console.log(question);
   try {
     const savedQuestion = await question.save();
-    res.status(200).json("Question posted successfully");
+
+    // Add the question ID to the user's postedQuestions array
+    console.log(savedQuestion);
+    const userId = req.body.userId; // Assuming you have the user's ID in the request
+    console.log("userid", userId);
+    await User.findByIdAndUpdate(userId, {
+      $push: {
+        postedQuestions: { date: Date.now(), questionId: savedQuestion._id },
+      },
+    });
+
+    const updatedUser = await User.findById(userId).populate("postedQuestions.questionId");
+
+    res.status(200).json(updatedUser);
   } catch (err) {
     console.log(err);
-    res.status(409).json("could not post a qustion :(");
+    res.status(409).json("Could not post a question :(");
   }
 };
 
@@ -44,33 +59,30 @@ export const voteQuestion = async (req, res) => {
       var downvoteIndex = question.downvotes.findIndex(
         (id) => id === String(userId)
       );
-      
-      if (downvoteIndex !== -1){
+
+      if (downvoteIndex !== -1) {
         question.downvotes = question.downvotes.filter(
           (id) => id !== String(userId)
         );
-      }
-      else{
-      var upvoteIndex = question.upvotes.findIndex(
-        (id) => id === String(userId)
-      );
-      if (upvoteIndex === -1) question.upvotes.push(String(userId));
+      } else {
+        var upvoteIndex = question.upvotes.findIndex(
+          (id) => id === String(userId)
+        );
+        if (upvoteIndex === -1) question.upvotes.push(String(userId));
       }
     } else {
-      
       var upvoteIndex = question.upvotes.findIndex(
         (id) => id === String(userId)
       );
-      if (upvoteIndex !== -1){
+      if (upvoteIndex !== -1) {
         question.upvotes = question.upvotes.filter(
           (id) => id !== String(userId)
         );
-      }
-      else{
-      var downvoteIndex = question.downvotes.findIndex(
-        (id) => id === String(userId)
-      );
-      if (downvoteIndex === -1) question.downvotes.push(String(userId));
+      } else {
+        var downvoteIndex = question.downvotes.findIndex(
+          (id) => id === String(userId)
+        );
+        if (downvoteIndex === -1) question.downvotes.push(String(userId));
       }
     }
     question.save();

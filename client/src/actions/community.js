@@ -1,6 +1,9 @@
 import axios from "axios";
+import { fetchAllUsers } from "./getAllUsers";
+import {getCurrentUser} from "./getCurrentUser";
 export const createPost = (postData, history) => async (dispatch) => {
   try {
+    console.log(postData);
     const { data } = await axios.post(
       "http://localhost:5000/community/post",
       postData
@@ -14,6 +17,23 @@ export const createPost = (postData, history) => async (dispatch) => {
     history("/community");
   } catch (err) {
     console.log(err);
+  }
+};
+
+
+// Action creator for creating a post
+export const uploadFiles = (formData) => async (dispatch) => {
+  try {
+    console.log(formData);
+    const response = await axios.post("http://localhost:5000/community/post/upload", formData);
+    console.log(response.data.files);
+    return response.data.files;
+    //dispatch({ type: UPLOAD_FILES_SUCCESS, payload: response.data });
+    // Perform any additional actions after successful file upload
+  } catch (error) {
+    return "error";
+    //dispatch({ type: UPLOAD_FILES_FAILURE, payload: error.response.data.error });
+    // Perform any error handling or display error message to the user
   }
 };
 
@@ -71,6 +91,22 @@ export const likeComment = (id, userId, commentId) => async (dispatch) => {
     );
     dispatch({ type: "LIKE_COMMENT", payload: data });
     dispatch(fetchPosts());
+    //dispatch(fetchAllQuestions());
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const followUser = (id, userId) => async (dispatch) => {
+  try {
+    const { data } = await axios.patch(
+      `http://localhost:5000/community/follow/${id}`,
+      {
+        userId,
+      }
+    );
+    // dispatch({ type: "LIKE_COMMENT", payload: data });
+    dispatch(fetchAllUsers());
     //dispatch(fetchAllQuestions());
   } catch (err) {
     console.log(err);

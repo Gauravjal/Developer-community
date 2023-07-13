@@ -5,6 +5,7 @@ const postSchema = mongoose.Schema({
   likes: { type: [String], default: [] },
   userPosted: { type: String, required: "post must have author" },
   userId: { type: String },
+  files: [String],
   postedOn: { type: Date, default: Date.now },
   comments: [
     {
@@ -13,8 +14,10 @@ const postSchema = mongoose.Schema({
       userId: { type: String },
       commentedOn: { type: Date, default: Date.now },
       likes: { type: [String], default: [] },
+      
     },
   ],
+  avatar: { type: String},
 });
 
 export default mongoose.model("Post", postSchema);

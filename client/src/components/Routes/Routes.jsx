@@ -17,6 +17,10 @@ import CommunityProfile from "../Community/Profile.jsx";
 import Explore from "../Community/Explore.jsx";
 import CreatePost from "../Community/CreatePost.jsx";
 import Comments from "../Community/Comments.jsx";
+import PublicProfile from "../Community/PublicProfile.jsx";
+import Notifications from "../Community/Notifications.jsx";
+import Followers from "../Community/Followers.jsx";
+import Following from "../Community/Following.jsx";
 function AllRoutes() {
   return (
     <div>
@@ -36,8 +40,12 @@ function AllRoutes() {
         <Route path="/community" element={<Community />} />
         <Route path="/community/profile" element={<CommunityProfile />} />
         <Route path="/community/explore" element={<Explore />} />
-        <Route path="/community/post" element={<CreatePost />} />
+        <Route path="/community/post" element={<CreatePost/>} />
         <Route path="/community/post/:id" element={<Comments />} />
+        <Route path="/community/profile/:id" element={<PublicProfile />} />
+        <Route path="/community/notifications" element={<Notifications />} />
+        <Route path="/community/followers/:id" element={<Followers />} />
+        <Route path="/community/following/:id" element={<Following />} />
       </Routes>
     </div>
   );

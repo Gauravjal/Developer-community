@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "../../actions/getCurrentUser";
 import {logout} from '../../actions/auth';
 const Navbar = () => {
-  var User = useSelector((state) => state.Users);
+  var User = useSelector((state) => state.currentUser);
   const dispatch = useDispatch();
   const navigate=useNavigate();
   const log_out=()=>{

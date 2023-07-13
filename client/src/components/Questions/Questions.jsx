@@ -40,7 +40,7 @@ function Questions() {
       <LeftSideBar />
       <div className="home-sub-container">
         <MainBar />
-        <RightSideBar />
+        {/* <RightSideBar /> */}
       </div>
     </div>
   );

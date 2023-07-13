@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function Alert({ Children, imageUrl }) {
+function Alert({ Children,type }) {
   return (
     <div style={{ padding: "9px" }}>
       <div
@@ -8,8 +8,8 @@ function Alert({ Children, imageUrl }) {
           display: "flex",
           alignItems: "center",
           height: "10vh",
-          borderLeft: "solid 3px #ef8236",
-          backgroundColor: "#fbf8d5",
+          borderLeft: type==="success"?"solid 3px green":"solid 3px #ef8236",
+          backgroundColor: type==="success"?"#d1ffbd":"#fbf8d5",
           boxShadow: "0px 1px 5px #00000033",
         }}
       >

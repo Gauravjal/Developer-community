@@ -1,12 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 function Avatar({ children }) {
+  var user = useSelector((state) => state.currentUser);
   return (
     <Link to="/profile" className="nav-item nav-logo">
       <button
         style={{
-          backgroundColor: "orangered",
-          color: "black",
+          backgroundColor:'none',
+          color:'none',
           borderRadius: "50%",
           padding: "10px",
           width: "40px",
@@ -19,7 +21,13 @@ function Avatar({ children }) {
           cursor: "pointer",
         }}
       >
-        {children}
+        <img
+              style={{ borderRadius: "35%", padding: "3%" }}
+              width="70%"
+              // src={file}
+              src={`http://localhost:5000/uploads/${user?.avatar}`}
+              alt="avatar"
+            />
       </button>
     </Link>
   );

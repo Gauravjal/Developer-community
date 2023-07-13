@@ -3,8 +3,7 @@ import User from "../models/User.js";
 // const { STRIPE_PUBLISHABLE_KEY, STRIPE_SECRET_KEY } = process.env;
 const STRIPE_PUBLISHABLE_KEY =
   "pk_test_51NKyfJSFQxjCVFiCcTXe7tetEOPExyUCUqUsCdk1jQBC9bNqD8MkJq0VODeXxm0dtw4mrLvuqHc8VBMJlKqzjsUK00tZBFeDAo";
-const STRIPE_SECRET_KEY =
-  "sk_test_51NKyfJSFQxjCVFiC3qjw6lGfcmDzGRuYb5VU8dS77LyjpmRacrofyOOX2764GIZdhY4VAr2URPSub9QIoNci51Ay00BMt6lRDr";
+const STRIPE_SECRET_KEY = process.env.SECRET_KEY;
 import Stripe from "stripe";
 const stripe = new Stripe(STRIPE_SECRET_KEY);
 
@@ -74,8 +73,8 @@ export const createSubscription = async (req, res) => {
   console.log(_id);
   try {
     if (!mongoose.Types.ObjectId.isValid(_id)) {
-        return res.status(404).json({ message: "No user with this id" });
-      }
+      return res.status(404).json({ message: "No user with this id" });
+    }
     const user = await mongoose.model("User").findById(_id);
     console.log(user);
     user.subscription = plan;

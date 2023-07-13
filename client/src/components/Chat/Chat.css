@@ -1,12 +1,20 @@
 /* Chatbot.css */
 
 .chat-container {
-    width: 500px;
-    height: 500px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    overflow: auto;
-  }
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-10%, -50%);
+  /* width: 500px; */
+  height: 60vh;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: auto;
+  background-color: #fff;
+  width:90vw;
+  max-width: 500px;
+}
+
   
   .message-list {
     padding: 10px;
@@ -23,12 +31,16 @@
   .user-message {
     background-color: #eaeaea;
     align-self: flex-start;
+    padding-left: 30px;
+    padding-right: 30px;
   }
   
   .chatbot-message {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #5f2ae0;
+    color:#eaeaea;
     align-self: flex-end;
+    padding-left: 30px;
+    padding-right: 30px;
   }
   
   .input-container {

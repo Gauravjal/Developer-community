@@ -10,3 +10,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.left-sidebar {
+  width: 164px;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+  background-color: white;
+  height: auto;
+  min-height: 100vh;
+  transition: box-shadow ease-in-out 0.1s, transform ease-in-out 0.1s;
+  box-sizing: border-box;
+  font-size: 13px;
+}

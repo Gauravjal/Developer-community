@@ -10,17 +10,39 @@ import Alert from "../Alert/Alert";
 function Questions() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  var User = useSelector((state) => state.Users);
+  var User = useSelector((state) => state.currentUser);
   const [questionTitle, setQuestionTitle] = useState("");
   const [questionBody, setQuestionBody] = useState("");
   const [questionTags, setQuestionTags] = useState("");
   const [showAlert, setAlert] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (questionTitle === "" || questionBody === "" || questionTags === "")
-      setAlert("Please fill all the details");
+    if (questionTitle === "" || questionBody === "" || questionTags === ""){
+      
+      const today = new Date().setHours(0, 0, 0, 0);
+        const questionsPostedToday=User?.postedQuestions?.filter(
+          (item) => new Date(item.date).setHours(0, 0, 0, 0) === today
+        );
+        console.log(User);
+        alert(User?.postedQuestions.length);
+        setAlert("Please fill all the details");
+    }
     else {
-      if (User)
+      if (User){
+        const today = new Date().setHours(0, 0, 0, 0);
+        const questionsPostedToday=User?.postedQuestions?.filter(
+          (item) => new Date(item.date).setHours(0, 0, 0, 0) === today
+        );
+        alert(questionsPostedToday.length);
+        if(User?.subscription==="Free" && questionsPostedToday.length>=1){
+          setAlert("You have reached your daily limit of 1 question");
+          navigate('/subscribe');
+        }
+        else if(User?.subscription==="Silver" && questionsPostedToday.length>=3){
+          setAlert("You have reached your daily limit of 3 questions");
+          navigate('/subscribe');
+        }
+        else{
         dispatch(
           postQuestion(
             {
@@ -33,7 +55,9 @@ function Questions() {
             navigate
           )
         );
-      else setAlert("sign up or login to post question");
+          }
+    }
+    else setAlert("sign up or login to post question");
     }
   };
   const handleKeyPress = (e) => {
@@ -56,7 +80,7 @@ function Questions() {
           <h1>Ask a Public Question</h1>
           <form
             onSubmit={handleSubmit}
-            style={{ maxWidth: "1200px", margin: "auto" }}
+            style={{ width:'70vw', margin: "auto" }}
           >
             {showAlert && <Alert Children={showAlert} />}
             <label htmlFor="name">

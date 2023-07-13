@@ -28,7 +28,7 @@ function CheckoutForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let { plan } = useParams();
-  var User = useSelector((state) => state.Users);
+  var User = useSelector((state) => state.currentUser);
   const [isPaymentLoading, setPaymentLoading] = useState(false);
   const [clientSecret, setClientSecret] = useState();
   const stripe = useStripe();
@@ -102,19 +102,34 @@ function CheckoutForm() {
   return (
     <div
       style={{
-        padding: "300px",
+        display:'flex',
+        marginTop:'6vh',
+         height:'90vh',
+        // margin:'auto',
+         justifyContent:'center',
+        alignItems:'center',
+        backgroundColor:'grey'
       }}
     >
+
       <div
         style={{
-          maxWidth: "500px",
+          marginTop:'40vh',
+          width:'400px',
           margin: "0 auto",
+          backgroundColor:'white',
+          padding:'10px',
+          borderRadius:'10px',
+          boxShadow:'2px 2px 2px 2px #888888'
         }}
       >
+        <h1 style={{textAlign:'center'}}>Payment</h1>
+        <h2>{plan} Plan</h2>
         <form
           style={{
             display: "block",
             width: "100%",
+           
           }}
           onSubmit={payMoney}
         >
@@ -123,6 +138,7 @@ function CheckoutForm() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+             
             }}
           >
             <CardElement

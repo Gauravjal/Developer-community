@@ -101,9 +101,9 @@ function Auth() {
           )}
           <br />
           {isSignUp ? (
-            <button type="submit">Sign Up</button>
+            <button style={{cursor:'pointer'}} type="submit">Sign Up</button>
           ) : (
-            <button type="submit">Login</button>
+            <button style={{cursor:'pointer'}} type="submit">Login</button>
           )}
           {isSignUp && (
             <p style={{ color: "#666767", fontSize: "13px" }}>

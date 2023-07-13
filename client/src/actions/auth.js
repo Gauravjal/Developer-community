@@ -5,7 +5,7 @@ import { getCurrentUser } from "./getCurrentUser";
 export const signUp = (AuthData, history) => async (dispatch) => {
   try {
     const { data } = await axios.post(
-      "https://stackoverflow-clone-mfrc.onrender.com/users/signUp",
+      "http://localhost:5000/users/signUp",
       AuthData
     );
 

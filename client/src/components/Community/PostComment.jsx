@@ -1,33 +1,28 @@
-import React, { useState } from "react";
-import ReactQuill from "react-quill";
+import React, { useState, useEffect } from "react";
+import ReactQuill, { Quill } from "react-quill";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
-import Dropzone from "react-dropzone";
 import { postComment } from "../../actions/community";
-
-function PostComment({id}) {
+const CustomBackground = Quill.import("attributors/style/background");
+CustomBackground.whitelist = [
+  "white",
+  "#f0f0f0",
+  "#ff0000",
+  "#00ff00",
+  "#0000ff",
+];
+Quill.register(CustomBackground, true);
+function PostComment({ id }) {
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  var User = useSelector((state) => state.Users);
+  var User = useSelector((state) => state.currentUser);
   const [text, setText] = useState("");
-  const [images, setImages] = useState([]);
 
   const handleTextChange = (value) => {
     setText(value);
     console.log(text);
-  };
-
-  const handleImageDrop = (acceptedFiles) => {
-    setImages((prevImages) => [...prevImages, ...acceptedFiles]);
-  };
-
-  const removeImage = (index) => {
-    setImages((prevImages) => {
-      const updatedImages = [...prevImages];
-      updatedImages.splice(index, 1);
-      return updatedImages;
-    });
   };
 
   const handleSubmit = (e) => {
@@ -38,15 +33,42 @@ function PostComment({id}) {
     else
       dispatch(
         postComment(
-          { id:id,commentBody: text, userCommented: User?.name, userId: User?._id },
+          {
+            id: id,
+            commentBody: text,
+            userCommented: User?.name,
+            userId: User?._id,
+          },
           navigate
         )
       );
 
     console.log("Text:", text);
-    console.log("Images:", images);
   };
 
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth <= 1000); // Set the breakpoint size according to your requirements
+    };
+
+    checkScreenSize();
+
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+  const modules = {
+    toolbar: [
+      [{ font: [] }],
+      [{ header: [1, 2, 3, 4, 5, 6, true] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ color: [] }, { background: [] }],
+      [{ script: "sub" }, { script: "super" }],
+      ["blockquote", "code-block"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link"],
+      ["clean"],
+    ],
+  };
   return (
     <div
       style={{
@@ -54,6 +76,7 @@ function PostComment({id}) {
         display: "flex",
         paddingTop: "50px",
         width: "100%",
+        
       }}
     >
       <div
@@ -63,43 +86,40 @@ function PostComment({id}) {
           width: "100%",
           justifyContent: "center",
           padding: "10px",
+          backgroundColor: "black",
         }}
       >
         <form onSubmit={handleSubmit}>
-          <div>
+          <div
+            style={{
+              backgroundColor: "#ffffff",
+              width: isSmallScreen ? "60vw" : "50vw",
+              borderRadius: "20px",
+              margin: "auto",
+            }}
+          >
             <ReactQuill
+              theme="snow"
+              modules={modules}
               value={text}
               onChange={handleTextChange}
+              style={{
+                width: "100%",
+
+                marginTop: "10px",
+                backgroundColor: "#ffffff",
+
+                border: "none",
+                minHeight: "30vh",
+              }}
               placeholder="Post a comment"
             />
           </div>
-          <div>
-            <Dropzone onDrop={handleImageDrop} multiple={true}>
-              {({ getRootProps, getInputProps }) => (
-                <div {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  <button>Select images</button>
-                </div>
-              )}
-            </Dropzone>
-          </div>
-          {images.length > 0 && (
-            <div>
-              <h3>Selected Images:</h3>
-              <ul>
-                {images.map((file, index) => (
-                  <li key={index}>
-                    {file.name}{" "}
-                    <button type="button" onClick={() => removeImage(index)}>
-                      Remove
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+
           <br />
-          <button type="submit">Comment</button>
+          <button style={{ cursor: "pointer" }} type="submit">
+            Comment
+          </button>
         </form>
       </div>
     </div>

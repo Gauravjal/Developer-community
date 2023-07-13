@@ -2,48 +2,71 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import moment from "moment";
-import Avatar from "../Avatar/Avatar";
+import {FaBirthdayCake} from "react-icons/fa";
 import LeftSideBar from "../LeftSideBar/LeftSidebar";
 import { useDispatch } from "react-redux";
 import Alert from "../Alert/Alert";
 import { Link } from "react-router-dom";
 import { updateCurrentUser } from "../../actions/getCurrentUser";
+
 function Profile() {
   const dispatch = useDispatch();
-  var User = useSelector((state) => state.Users);
+  var User = useSelector((state) => state.currentUser);
   console.log("currentUser", User);
   const [showAlert, setAlert] = useState("");
   const [name, setName] = useState(User?.name);
   const [about, setAbout] = useState(User?.about);
   const [location, setLocation] = useState(User?.location);
   const [tags, setTags] = useState(User?.tags);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setAlert("");
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, [showAlert]);
   const handleSubmit = (e) => {
     e.preventDefault();
 
     console.log({ name, about, location, tags });
-    if(name==="")
-    alert("Name is required");
-    else
-    dispatch(
-      updateCurrentUser({ _id: User?._id, name, about, location, tags })
-    );
+    if (name === "") alert("Name is required");
+    else{
+      dispatch(
+        updateCurrentUser({ _id: User?._id, name, about, location, tags })
+      );
+      setAlert("Profile updated successfully")
+    }
   };
+
   return (
     <div className="home-main-container">
       <LeftSideBar />
-      <div style={{border:'1px solid black',marginLeft:'30px',paddingLeft:'50px'}} className="main-bar">
+      <div
+        style={{
+          marginLeft: "14vw",
+          width: "75vw",
+        }}
+        className="main-bar"
+      >
         <br />
 
         <div className="profile-name">
           <h1>{User?.name}</h1>
-          <h3>Joined {moment(User?.joinedOn).fromNow()}</h3>
+          <h3><FaBirthdayCake/>Joined {moment(User?.joinedOn).fromNow()}</h3>
         </div>
         <hr />
         <section>
-          <h1>Edit profile</h1>
+        {showAlert && <Alert type="success" Children={showAlert} />}
+          <h1 style={{textAlign:'center'}}>Edit profile</h1>
           <form
             onSubmit={handleSubmit}
-            style={{ maxWidth: "1200px", margin: "auto" }}
+            style={{
+              maxWidth: "80%",
+              margin: "auto",
+              border:'1px solid black',
+              padding:'20px',
+              borderRadius:'10px'
+            }}
           >
             <label htmlFor="name">
               <h4>Display Name</h4>
@@ -52,6 +75,12 @@ function Profile() {
               className="form-input"
               type="text"
               id="name"
+              style={{
+                padding: "10px",
+                width: "calc(100% - 40px)",
+                fontSize: "13px",
+                border: "solid 1px #0000003e",
+              }}
               onChange={(e) => {
                 setName(e.target.value);
               }}
@@ -82,6 +111,12 @@ function Profile() {
               type="text"
               id="name"
               value={location}
+              style={{
+                padding: "10px",
+                width: "calc(100% - 40px)",
+                fontSize: "13px",
+                border: "solid 1px #0000003e",
+              }}
               onChange={(e) => {
                 setLocation(e.target.value);
               }}
@@ -94,12 +129,28 @@ function Profile() {
               type="text"
               id="name"
               value={tags}
+              style={{
+                padding: "10px",
+                width: "calc(100% - 40px)",
+                fontSize: "13px",
+                border: "solid 1px #0000003e",
+              }}
               onChange={(e) => {
                 setTags(e.target.value);
               }}
             />
             <br />
-            <button type="submit">Update Profile</button>
+            <button
+              type="submit"
+              style={{
+                padding: "10px",
+                backgroundColor: "blue",
+                color: "white",
+                border: "none",
+              }}
+            >
+              Update Profile
+            </button>
           </form>
         </section>
       </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllUsers } from "../../actions/getAllUsers";
 import { Link, useParams } from "react-router-dom";
+import LeftSideBar from "../LeftSideBar/LeftSidebar";
 import moment from "moment";
 function Public() {
   let { id } = useParams();
@@ -16,12 +17,15 @@ function Public() {
   console.log("users", Users);
   return (
     <>
+    <LeftSideBar/>
       <div
+      className="main-bar"
         style={{
           display: "flex",
           flexDirection: "row",
           flexWrap: "wrap",
           justifyContent: "space-between",
+          marginLeft: "14vw", width: "75vw" 
         }}
       >
         {Users?.data

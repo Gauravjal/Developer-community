@@ -4,7 +4,7 @@ import LeftSideBar from "./LeftSideBar";
 import RightSideBar from "./RightSideBar";
 function Community() {
   return (
-    <div style={{display:'flex',paddingTop:'50px'}}>
+    <div style={{display:'flex',paddingTop:'50px',backgroundColor:'#eef1f4'}}>
         
         <LeftSideBar />
         <Home/>

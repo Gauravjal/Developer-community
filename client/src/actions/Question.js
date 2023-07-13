@@ -2,10 +2,11 @@ import axios from "axios";
 export const postQuestion = (questionData, history) => async (dispatch) => {
   try {
     const { data } = await axios.post(
-      "https://stackoverflow-clone-mfrc.onrender.com/questions/question",
+      "http://localhost:5000/questions/question",
       questionData
     );
-    dispatch({ type: "POST_QUESTION", payload: data });
+    //dispatch({ type: "POST_QUESTION", payload: data });
+    dispatch({ type: "UPDATE_CURRENT_USER", payload: data });
     dispatch(fetchAllQuestions());
     history("/");
   } catch (err) {
