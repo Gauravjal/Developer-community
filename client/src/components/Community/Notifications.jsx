@@ -80,7 +80,7 @@ function Notification() {
                         border: "1px solid grey",
                       }}
                       alt="profile PIC"
-                      src={`http://localhost:5000/uploads/${notification?.avatar}`}
+                      src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${notification?.avatar}`}
                     />
                     <strong style={{ marginRight: "10px" }}>
                       {notification.name}
@@ -121,7 +121,7 @@ function Notification() {
                         border: "1px solid grey",
                       }}
                       alt="profile PIC"
-                      src={`http://localhost:5000/uploads/${notification?.avatar}`}
+                      src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${notification?.avatar}`}
                     />
                     <strong style={{ marginRight: "10px" }}>
                       {notification.name}
@@ -162,7 +162,7 @@ function Notification() {
                         border: "1px solid grey",
                       }}
                       alt="profile PIC"
-                      src={`http://localhost:5000/uploads/${notification?.avatar}`}
+                      src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${notification?.avatar}`}
                     />
                     <strong style={{ marginRight: "10px" }}>
                       {notification.name}
@@ -204,7 +204,7 @@ function Notification() {
                         border: "1px solid grey",
                       }}
                       alt="profile PIC"
-                      src={`http://localhost:5000/uploads/${notification?.avatar}`}
+                      src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${notification?.avatar}`}
                     />
                     <strong style={{ marginRight: "10px" }}>
                       {notification.name}

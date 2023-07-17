@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import copy from "copy-to-clipboard";
-import moment from 'moment';
+import moment from "moment";
 import { BiLike } from "react-icons/bi";
 import { AiFillLike } from "react-icons/ai";
 import { FaRegComments } from "react-icons/fa";
@@ -11,17 +11,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { likePost } from "../../actions/community";
 import { likeComment } from "../../actions/community";
 import { useLocation } from "react-router-dom";
-import {MdOutlineUpdate} from "react-icons/md"
+import { MdOutlineUpdate } from "react-icons/md";
 import Alert from "../Alert/Alert";
 import Comments from "./Comments";
 import { Link } from "react-router-dom";
 function Post({ children }) {
   var location = useLocation();
-  const url = "http://localhost:3000";
+  const url = "https://stackoverflow-clone-mfrc.onrender.com";
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.currentUser);
-  let alertMessage=useSelector((state)=>state.alert);
+  let alertMessage = useSelector((state) => state.alert);
   const [showComments, setShowComments] = useState(false);
 
   return (
@@ -75,23 +75,33 @@ function Post({ children }) {
           display: "flex",
           alignItems: "center",
           marginBottom: "10px",
-          justifyContent:"space-between"
+          justifyContent: "space-between",
         }}
       >
-        <div style={{
-          display: "flex",
-          alignItems: "center",
-          marginBottom: "10px",
-        }}>
-        <img
-          width="5%"
-          style={{ borderRadius: "50%", marginRight: "10px",border:'1px solid black' }}
-          alt="profile PIC"
-          src={`http://localhost:5000/uploads/${children?.avatar}`}
-        />
-        <strong>{children?.userPosted}</strong>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            marginBottom: "10px",
+          }}
+        >
+          <img
+            width="25vw"
+            height="25vh"
+            style={{
+              borderRadius: "50%",
+              marginRight: "10px",
+              border: "1px solid black",
+            }}
+            alt="profile PIC"
+            src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${children?.avatar}`}
+          />
+          <strong>{children?.userPosted}</strong>
         </div>
-        <p style={{position:'flex-end'}}><MdOutlineUpdate style={{marginRight:'5px'}}/>{moment(children.postedOn).fromNow()}</p>
+        <p style={{ position: "flex-end" }}>
+          <MdOutlineUpdate style={{ marginRight: "5px" }} />
+          {moment(children.postedOn).fromNow()}
+        </p>
       </div>
       <div
         style={{
@@ -120,7 +130,7 @@ function Post({ children }) {
               }}
               //width="60%"
               height="150vh"
-              src={`http://localhost:5000/uploads/${file}`}
+              src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${file}`}
               alt="img"
             />
           ) : (
@@ -132,7 +142,7 @@ function Post({ children }) {
               }}
               width="60%"
               height="150vh"
-              src={`http://localhost:5000/uploads/${file}`}
+              src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${file}`}
               controls
               autoPlay
               alt="video"
@@ -232,7 +242,6 @@ function Post({ children }) {
       </div>
       {showComments && (
         <div style={{ width: "100%", marginTop: "10px" }}>
-          
           <PostComment id={children?._id} />
           <strong>Comments</strong>
           {children?.comments?.map((comment) => {
@@ -245,21 +254,26 @@ function Post({ children }) {
                 }}
               >
                 <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          marginBottom: "10px",
-          justifyContent:"space-between"
-        }}
-      >
-                 <div style={{
-          display: "flex",
-          alignItems: "center",
-          marginBottom: "10px",
-        }}>
-                <strong>{comment?.userCommented}</strong>
-                </div>
-                <p style={{position:'flex-end'}}><MdOutlineUpdate style={{marginRight:'5px'}}/>{moment(comment.commentedOn).fromNow()}</p>
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginBottom: "10px",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    <strong>{comment?.userCommented}</strong>
+                  </div>
+                  <p style={{ position: "flex-end" }}>
+                    <MdOutlineUpdate style={{ marginRight: "5px" }} />
+                    {moment(comment.commentedOn).fromNow()}
+                  </p>
                 </div>
                 <div
                   style={{

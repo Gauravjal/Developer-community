@@ -52,9 +52,16 @@ export const addNewCard = async (req, res) => {
 };
 
 export const createCharges = async (req, res) => {
-  const { items } = req.body;
+  const { plan } = req.body;
+  console.log("items",plan);
+  console.log("items",req.body);
+  let amt;
+  if(plan==="Gold")
+  amt=100000;
+  else
+  amt=50000;
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: 100000,
+    amount: amt,
     currency: "inr",
     description: "payment",
     payment_method_types: ["card"],

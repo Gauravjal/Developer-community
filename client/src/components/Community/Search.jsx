@@ -8,6 +8,7 @@ function Search() {
   return (
     <form style={{ position: "relative", padding: "10px", width: "100%" }}>
       <input
+      placeholder="search users..."
         style={{ padding: "10px", width: "90%" }}
         onKeyPress={(e) => {
           if (e.key === "Enter") {
@@ -25,7 +26,7 @@ function Search() {
         style={{
           position: "absolute",
           left: "88%",
-          top: "30%",
+          top: "3vh",
           fontSize: "150%",
         }}
       />
@@ -59,7 +60,7 @@ function Search() {
                 width="50vw"
                 style={{ borderRadius: "60%",height:'50%',border:'1px solid grey'}}
                 alt="profile PIC"
-                src={`http://localhost:5000/uploads/${item?.avatar}`}
+                src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${item?.avatar}`}
               ></img>
               </div>
               <h4

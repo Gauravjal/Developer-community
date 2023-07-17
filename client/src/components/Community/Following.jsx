@@ -89,7 +89,7 @@ function Following() {
                     width="50vw"
                     style={{ borderRadius: "60%", height: "50%" ,border:'1px solid grey'}}
                     alt="profile PIC"
-                    src={`http://localhost:5000/uploads/${item?.avatar}`}
+                    src={`https://stackoverflow-clone-mfrc.onrender.com/${item?.avatar}`}
                   ></img>
                 </div>
                 <h4

@@ -95,7 +95,7 @@ function Profile() {
                 }}
                 width="50%"
 
-                src={`http://localhost:5000/uploads/${user?.avatar}`}
+                src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${user?.avatar}`}
                 alt="avatar"
               />
             ) : (

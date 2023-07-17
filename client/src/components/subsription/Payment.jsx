@@ -37,7 +37,7 @@ function CheckoutForm() {
 
   const fetchClientSecret = async () => {
     axios
-      .post(`http://localhost:5000/payment/create-charges`)
+      .post(`http://localhost:5000/payment/create-charges`,{plan:plan})
       .then((res) => {
         console.log("hihi", res.data.clientSecret);
         console.log(`fetched ${res.data.clientSecret}`);

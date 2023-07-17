@@ -66,7 +66,7 @@ function Profile() {
                     style={{margin:'1vw', borderRadius: "35%", padding: "3%" ,border:'1px solid grey'}}
                     width="20%"
                     height="60%"
-                    src={`http://localhost:5000/uploads/${item?.avatar}`}
+                    src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${item?.avatar}`}
                     alt="avatar"
                   ></img>
                   <div>

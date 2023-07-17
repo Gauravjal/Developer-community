@@ -25,7 +25,7 @@ function Avatar({ children }) {
               style={{ borderRadius: "35%", padding: "3%" }}
               width="70%"
               // src={file}
-              src={`http://localhost:5000/uploads/${user?.avatar}`}
+              src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${user?.avatar}`}
               alt="avatar"
             />
       </button>

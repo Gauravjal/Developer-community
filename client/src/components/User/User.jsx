@@ -57,7 +57,7 @@ function User() {
               >
                 <img
                   style={{ width: "50px", height: "10vh" ,border:'1px solid grey',borderRadius:'10px'}}
-                  src={`http://localhost:5000/uploads/${item?.avatar}`}
+                  src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${item?.avatar}`}
                   alt="img"
                 />
                 <div

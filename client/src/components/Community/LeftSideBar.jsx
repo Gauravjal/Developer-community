@@ -25,30 +25,31 @@ function LeftSideBar() {
     <div
       className="navigation"
       style={{
-        width: isSmallScreen ? "8vw" : "15vw",
+        width: isSmallScreen?"10vw":"15vw",
         height: "100%",
         position: "fixed",
         left: "0",
-        padding: "30px 15px",
+        padding: isSmallScreen?"10px 0px":"30px 15px",
         background: "#2b343b",
         // backdropFilter: "blur(5px)",
         trainsition: "width 0.5s",
         boxShadow: "5px 0 0 #4187f6",
       }}
     >
-      <ul
-        style={{ listStyle: "none", position: "relative",
-         padding: isSmallScreen?"0 10px":"0 15px"
+      {/* <ul
+        style={{ listStyle: "none",
+        //  padding: isSmallScreen?"0 10px":"0 15px"
          }}
-      >
+      > */}
         <li
           style={{
-            margin: "30px 0",
+            // margin: "30px 0",
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-start",
             cursor: "pointer",
             borderRadius: "10px",
+            width: "80%",
             padding: "1vw",
             background:
               location.pathname === "/community" ? "#4187f6" : "#2b343b",
@@ -101,7 +102,7 @@ function LeftSideBar() {
         </li>
         <li
           style={{
-            margin: "30px 0",
+            // margin: "30px 0",
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-start",
@@ -157,7 +158,7 @@ function LeftSideBar() {
         </li>
         <li
           style={{
-            margin: "30px 0",
+            // margin: "30px 0",
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-start",
@@ -214,7 +215,7 @@ function LeftSideBar() {
         </li>
         <li
           style={{
-            margin: "30px 0",
+            // margin: "30px 0",
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-start",
@@ -269,7 +270,7 @@ function LeftSideBar() {
         </li>
         <li
           style={{
-            margin: "30px 0",
+            // margin: "30px 0",
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-start",
@@ -319,7 +320,7 @@ function LeftSideBar() {
             )}
           </Link>
         </li>
-      </ul>
+      {/* </ul> */}
     </div>
   );
 }
