@@ -33,13 +33,15 @@ export const login = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User doesn't exist" });
     }
-    let isPasswordCorrect = bcrypt.compare(password, user.password);
+
+    let isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) {
       return res.status(404).json({ message: "Password is incorrect" });
     }
     const token = jwt.sign({ email: user.email, id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
+    
     return res.json({ res: user, token });
   } catch (err) {
     console.log(err);

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
 import { postComment } from "../../actions/community";
 import Alert from "../Alert/Alert";
+import { setGlobalAlert } from "../../actions/alert";
 const CustomBackground = Quill.import("attributors/style/background");
 CustomBackground.whitelist = [
   "white",
@@ -31,7 +32,12 @@ function PostComment({ id }) {
     e.preventDefault();
     // Perform your post submission logic here
     // You can access the text and images state variables to get the entered text and uploaded images
-    if (text === "") alert("Please enter post");
+    if (text === ""){
+       dispatch(setGlobalAlert("Please enter post"));
+       setTimeout(() => {
+        dispatch(setGlobalAlert(""));
+      }, 5000);
+  }
     else
       dispatch(
         postComment(

@@ -23,20 +23,14 @@ function Auth() {
       if (name === "" || email === "" || password === "")
         setAlert("Please fill all the fields");
       else{ dispatch(signUp({ name, email, password }, navigate));
-      dispatch(setGlobalAlert("Welcome to Stackoverflow community"));
-      setTimeout(() => {
-        dispatch(setGlobalAlert(""));
-      }, 5000); 
+      
     }
     } else {
       if (email === "" || password === "") {
         setAlert("Please fill all the fields");
       } else {
         dispatch(login({ email, password }, navigate));
-        dispatch(setGlobalAlert("Welcome back"));
-        setTimeout(() => {
-          dispatch(setGlobalAlert(""));
-        }, 5000); 
+        
       }
     }
   };

@@ -132,10 +132,11 @@ function Post({ children }) {
               style={{
                 padding: "3%",
                 margin: "auto",
-                border: "1px solid pink",
+                border: "1px solid #eef1f4",
+                borderRadius:'10px',
+                width:"70%"
               }}
-              width="60%"
-              height="150vh"
+              
               src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${file}`}
               controls
               autoPlay
@@ -147,10 +148,12 @@ function Post({ children }) {
               style={{
                 padding: "3%",
                 margin: "auto",
-                border: "1px solid pink",
+                border: "1px solid #eef1f4",
+                borderRadius:'10px',
+                width:"70%",
               }}
-              //width="60%"
-              height="150vh"
+              
+              //height="90vh"
               src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${file}`}
               alt="img"
             />

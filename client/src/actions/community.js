@@ -4,6 +4,7 @@ import {getCurrentUser} from "./getCurrentUser";
 import { setGlobalAlert } from "./alert";
 export const createPost = (postData, history) => async (dispatch) => {
   try {
+    dispatch(setGlobalAlert("Loading..."));
     console.log(postData);
     const { data } = await axios.post(
       "https://stackoverflow-clone-mfrc.onrender.com/community/post",

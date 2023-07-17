@@ -30,7 +30,7 @@ function Profile() {
     e.preventDefault();
 
     console.log({ name, about, location, tags });
-    if (name === "") alert("Name is required");
+    if (name === "") setAlert("Name is required");
     else{
       dispatch(
         updateCurrentUser({ _id: User?._id, name, about, location, tags })

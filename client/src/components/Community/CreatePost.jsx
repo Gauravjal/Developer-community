@@ -9,6 +9,7 @@ import RightSideBar from "./RightSideBar";
 import { createPost } from "../../actions/community";
 import { RiImageAddFill } from "react-icons/ri";
 import { uploadFiles } from "../../actions/community";
+import { setGlobalAlert } from "../../actions/alert";
 const CustomBackground = Quill.import("attributors/style/background");
 CustomBackground.whitelist = [
   "white",
@@ -37,7 +38,7 @@ function CreatePost() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const User = useSelector((state) => state.currentUser);
-
+  const alertMessage=useSelector((state)=> state.alert);
   const handleTextChange = (value) => {
     setText(value);
     console.log(text);
@@ -52,7 +53,6 @@ function CreatePost() {
     // selectedFiles.push(e.target.files);
     //Array.from(e.target.files);
     setFiles(selectedFiles);
-    alert(files.length);
     for (let i = 0; i < files.length; i++) {
       console.log(files[i].name);
     }
@@ -60,8 +60,11 @@ function CreatePost() {
   const handleSubmit = async(e) => {
     e.preventDefault();
     let fileNames=[];
-    if (text === "" && files.length === 0) {
-      alert("Please enter a post.");
+    if (text === "") {
+      dispatch(setGlobalAlert("Please enter a post."));
+      setTimeout(() => {
+        dispatch(setGlobalAlert(""));
+      }, 5000);
     } else {
       console.log("pahije",files);
       if (files.length > 0) {
@@ -122,6 +125,7 @@ function CreatePost() {
           marginRight: isSmallScreen ? "1vw" : "24vw",
         }}
       >
+        {alertMessage?.data && <Alert type="danger" Children={alertMessage?.data} />}
         <h1 style={{ textAlign: "center" }}>Create Post</h1>
         <form onSubmit={handleSubmit}>
           <div

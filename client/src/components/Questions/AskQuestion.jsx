@@ -26,7 +26,6 @@ function Questions() {
           (item) => new Date(item.date).setHours(0, 0, 0, 0) === today
         );
         console.log(User);
-        alert(User?.postedQuestions.length);
         setAlert("Please fill all the details");
     }
     else {

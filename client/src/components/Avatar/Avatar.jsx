@@ -9,7 +9,7 @@ function Avatar({ children }) {
       to="/profile"
       className="nav-item nav-logo"
     >
-      <button
+      {/* <button
         style={{
           backgroundColor: "transparent",
           color: "none",
@@ -24,15 +24,20 @@ function Avatar({ children }) {
           cursor: "pointer",
           border:'1px solid grey'
         }}
-      >
+      > */}
         <img
-          style={{ borderRadius: "35%", padding: "3%" }}
-          width="70%"
+          width="30vw"
+          height="30vh"
+          style={{
+            borderRadius: "50%",
+            marginRight: "10px",
+            border: "1px solid grey",
+          }}
           // src={file}
           src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${user?.avatar}`}
           alt="avatar"
         />
-      </button>
+      {/* </button> */}
     </Link>
   );
 }

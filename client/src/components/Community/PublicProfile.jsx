@@ -45,7 +45,7 @@ function Profile() {
             return (
               <div
                 style={{
-                  border: "1px solid black",
+                  // border: "1px solid black",
                   borderTop: "none",
                   display: "flex",
                   flexDirection: "column",
