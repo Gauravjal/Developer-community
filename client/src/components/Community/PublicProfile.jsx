@@ -8,6 +8,7 @@ import LeftSideBar from "./LeftSideBar";
 import RightSideBar from "./RightSideBar";
 import { MdAdd } from "react-icons/md";
 import { MdMinimize } from "react-icons/md";
+import {MdLocationOn} from "react-icons/md";
 import { fetchAllUsers } from "../../actions/getAllUsers";
 import { followUser } from "../../actions/community";
 import Alert from "../Alert/Alert";
@@ -48,9 +49,8 @@ function Profile() {
                   borderTop: "none",
                   display: "flex",
                   flexDirection: "column",
-                  marginLeft:'17vw',
                   width:'100%',
-                  height:'100vh',
+                  marginLeft:isSmallScreen?'10vw':'17vw',
                   marginRight: isSmallScreen ? "1vw" : "24vw",
                 }}
               >
@@ -63,15 +63,20 @@ function Profile() {
                   }}
                 >
                   <img
-                    style={{margin:'1vw', borderRadius: "35%", padding: "3%" ,border:'1px solid grey'}}
-                    width="20%"
-                    height="60%"
+                style={{
+                  margin: "1vw",
+                  borderRadius: "35%",
+                  padding: "3%",
+                  border: "1px solid grey",
+                }}
+                width="50vw"
+                height="60vh"
                     src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${item?.avatar}`}
                     alt="avatar"
                   ></img>
                   <div>
-                    <h3>{item?.name}</h3>
-                    <h4>Location</h4>
+                    <h3 style={{textAlign:'center'}}>{item?.name}</h3>
+                    <h4 style={{textAlign:'center'}}>{item?.location && <MdLocationOn />}{item?.location}</h4>
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <div
                 style={{

@@ -4,11 +4,15 @@ import { useSelector } from "react-redux";
 function Avatar({ children }) {
   var user = useSelector((state) => state.currentUser);
   return (
-    <Link to="/profile" className="nav-item nav-logo">
+    <Link
+      style={{ backgroundColor: "none" }}
+      to="/profile"
+      className="nav-item nav-logo"
+    >
       <button
         style={{
-          backgroundColor:'none',
-          color:'none',
+          backgroundColor: "transparent",
+          color: "none",
           borderRadius: "50%",
           padding: "10px",
           width: "40px",
@@ -16,18 +20,18 @@ function Avatar({ children }) {
           margin: "10px",
           fontSize: "20px",
           fontWeight: "bold",
-          border: "none",
           outline: "none",
           cursor: "pointer",
+          border:'1px solid grey'
         }}
       >
         <img
-              style={{ borderRadius: "35%", padding: "3%" }}
-              width="70%"
-              // src={file}
-              src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${user?.avatar}`}
-              alt="avatar"
-            />
+          style={{ borderRadius: "35%", padding: "3%" }}
+          width="70%"
+          // src={file}
+          src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${user?.avatar}`}
+          alt="avatar"
+        />
       </button>
     </Link>
   );

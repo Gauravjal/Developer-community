@@ -26,7 +26,7 @@ function Search() {
         style={{
           position: "absolute",
           left: "88%",
-          top: "3vh",
+          top: "2.5vh",
           fontSize: "150%",
         }}
       />
@@ -41,7 +41,7 @@ function Search() {
               textDecoration: "none",
               display: "flex",
               flexDirection: "row",
-              width: "20vw",
+              width: "50vw",
               alignItems: "center",
               padding: "10px",
               marginRight: "10px",

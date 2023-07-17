@@ -172,7 +172,7 @@
   .modal-content {
     background-color: white;
     /* padding: 20px; */
-    width:40%;
-    height:80%;
+    width:400px;
+    height:100vh;
     border-radius: 5px;
   }

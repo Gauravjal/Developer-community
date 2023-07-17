@@ -47,10 +47,22 @@ function Auth() {
 
     return () => clearTimeout(timeout);
   }, [showAlert]);
+
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth <= 1000); // Set the breakpoint size according to your requirements
+    };
+
+    checkScreenSize();
+
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
   return (
     <section className="auth-section">
       
-      {isSignUp && <AboutAuth />}
+      {isSignUp && !isSmallScreen && <AboutAuth />}
       <div className="auth-container">
         {/* {isSignUp && <img width="13px" src={Logo} alt="logo" />} */}
         

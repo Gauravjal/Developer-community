@@ -69,7 +69,7 @@ function Profile() {
           display: "flex",
           flexDirection: "column",
           width: "100%",
-          marginLeft:isSmallScreen?'12vw':'17vw',
+          marginLeft:isSmallScreen?'10vw':'17vw',
           marginRight: isSmallScreen ? "1vw" : "24vw",
           backgroundColor: "#eef1f4",
           minHeight: "100vh",

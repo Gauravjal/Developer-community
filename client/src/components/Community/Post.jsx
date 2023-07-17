@@ -78,12 +78,17 @@ function Post({ children }) {
           justifyContent: "space-between",
         }}
       >
+        <Link
+                style={{cursor:'pointer', textDecoration: "none", display: "flex" }}
+                to={`/community/profile/${children.userId}`}
+              >
         <div
           style={{
             display: "flex",
             alignItems: "center",
             marginBottom: "10px",
           }}
+
         >
           <img
             width="25vw"
@@ -96,8 +101,9 @@ function Post({ children }) {
             alt="profile PIC"
             src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${children?.avatar}`}
           />
-          <strong>{children?.userPosted}</strong>
+          <strong style={{color:'black'}}>{children?.userPosted}</strong>
         </div>
+        </Link>
         <p style={{ position: "flex-end" }}>
           <MdOutlineUpdate style={{ marginRight: "5px" }} />
           {moment(children.postedOn).fromNow()}
@@ -121,19 +127,7 @@ function Post({ children }) {
         }}
       >
         {children?.files?.map((file) =>
-          file.slice(-4) === ".svg" || file.slice(-4) === ".png" ? (
-            <img
-              style={{
-                padding: "3%",
-                margin: "auto",
-                border: "1px solid pink",
-              }}
-              //width="60%"
-              height="150vh"
-              src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${file}`}
-              alt="img"
-            />
-          ) : (
+          file.slice(-4) === ".mp4" ? (
             <video
               style={{
                 padding: "3%",
@@ -147,6 +141,19 @@ function Post({ children }) {
               autoPlay
               alt="video"
             ></video>
+            
+          ) : (
+            <img
+              style={{
+                padding: "3%",
+                margin: "auto",
+                border: "1px solid pink",
+              }}
+              //width="60%"
+              height="150vh"
+              src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${file}`}
+              alt="img"
+            />
           )
         )}
       </div>
@@ -261,6 +268,10 @@ function Post({ children }) {
                     justifyContent: "space-between",
                   }}
                 >
+                  <Link
+                style={{cursor:'pointer', textDecoration: "none", display: "flex" }}
+                to={`/community/profile/${children.userId}`}
+              >
                   <div
                     style={{
                       display: "flex",
@@ -270,6 +281,7 @@ function Post({ children }) {
                   >
                     <strong>{comment?.userCommented}</strong>
                   </div>
+                  </Link>
                   <p style={{ position: "flex-end" }}>
                     <MdOutlineUpdate style={{ marginRight: "5px" }} />
                     {moment(comment.commentedOn).fromNow()}

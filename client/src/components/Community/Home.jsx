@@ -23,7 +23,7 @@ function Home() {
     console.log(posts?.data);
   }, [dispatch]);
   return (
-    <div  style={{ borderLeft:'none',width:'100%',borderTop:'none',marginLeft:isSmallScreen?'12vw':'17vw',marginRight:isSmallScreen?'1vw':'24vw' }}>
+    <div  style={{ borderLeft:'none',width:'100%',borderTop:'none',marginLeft:isSmallScreen?'10vw':'17vw',marginRight:isSmallScreen?'1vw':'24vw' }}>
       {alertMessage?.data && <Alert type="success" Children={alertMessage?.data} />}
       <div
           style={{

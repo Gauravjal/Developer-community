@@ -2,17 +2,18 @@
 
 .chat-container {
   position: fixed;
-  top: 40%;
+  top: 30%;
   /* left: 50%; */
   /* transform: translate(-10%, -30%); */
   /* width: 500px; */
-  height: 70vh;
+  height: 60vh;
   border: 1px solid #ccc;
   border-radius: 5px;
   overflow: auto;
   background-color: #fff;
   width:90vw;
   max-width: 500px;
+  margin-bottom: 1vh;
 }
 
   

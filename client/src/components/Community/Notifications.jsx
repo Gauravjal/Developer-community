@@ -49,6 +49,9 @@ function Notification() {
         }}
       >
         <h1 style={{ textAlign: "center" }}>Notifications</h1>
+        {user?.notifications.length===0 && 
+          <h3 style={{ textAlign: "center" }}>No notifications yet !!</h3>
+        }
         {user?.notifications?.map((notification) => {
           return (
             <>

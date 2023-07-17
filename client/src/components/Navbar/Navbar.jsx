@@ -56,19 +56,14 @@ const Navbar = () => {
           ) : (
             <>
               <Avatar
-                backgroundColor="#009dff"
-                px="10px"
-                py="7px"
-                borderRadius="50%"
-                color="white"
-              >
-                <Link
+              />
+                {/* <Link
                   to={`/`}
                   style={{ color: "white", textDecoration: "none" }}
                 >
                   {User?.name?.charAt(0).toUpperCase()}
                 </Link>
-              </Avatar>
+              </Avatar> */}
               <button onClick={log_out} className="nav-item nav-links">Log out</button>
             </>
           )}
