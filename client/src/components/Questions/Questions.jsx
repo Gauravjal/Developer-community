@@ -1,6 +1,7 @@
 import React from "react";
 import LeftSideBar from "../LeftSideBar/LeftSidebar";
 import RightSideBar from "../RightSideBar/RightSideBar";
+import Alert from "../Alert/Alert";
 import MainBar from "../MainSideBar/MainSideBar";
 function Questions() {
   var questionList = [

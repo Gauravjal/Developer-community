@@ -7,7 +7,7 @@ function Alert({ Children,type }) {
         style={{
           display: "flex",
           alignItems: "center",
-          height: "10vh",
+          height: "5vh",
           borderLeft: type==="success"?"solid 3px green":"solid 3px #ef8236",
           backgroundColor: type==="success"?"#d1ffbd":"#fbf8d5",
           boxShadow: "0px 1px 5px #00000033",

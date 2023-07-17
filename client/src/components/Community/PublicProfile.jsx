@@ -10,6 +10,7 @@ import { MdAdd } from "react-icons/md";
 import { MdMinimize } from "react-icons/md";
 import { fetchAllUsers } from "../../actions/getAllUsers";
 import { followUser } from "../../actions/community";
+import Alert from "../Alert/Alert";
 function Profile() {
     const [isSmallScreen, setIsSmallScreen] = useState(false);
   useEffect(() => {

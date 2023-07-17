@@ -56,7 +56,7 @@ function Chatbot({ showBot, setShowBot }) {
         <h2>Chatbot</h2>
       </div> */}
       <div
-        style={{ z: "100", backgroundColor: "#fdf7e2" }}
+        style={{ z: "100", backgroundColor: "#fff" }}
         className="chat-container"
       >
         <div style={{marginTop:'50px'}} className="message-list">

@@ -1,40 +1,62 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Logo from "../../assets/logo.png";
+import Alert from "../Alert/Alert";
 import AboutAuth from "./AboutAuth";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../actions/auth";
 import { signUp } from "../../actions/auth";
-
+import { setGlobalAlert } from "../../actions/alert";
 import "./Auth.css";
 function Auth() {
+  let alertMessage=useSelector((state)=>state.alert);
   const navigate = useNavigate();
   const dispatch = useDispatch(login);
   const [isSignUp, setIsSignUp] = useState(true);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showAlert, setAlert] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isSignUp) {
       if (name === "" || email === "" || password === "")
-        alert("Please fill all the fields");
-      else dispatch(signUp({ name, email, password }, navigate));
+        setAlert("Please fill all the fields");
+      else{ dispatch(signUp({ name, email, password }, navigate));
+      dispatch(setGlobalAlert("Welcome to Stackoverflow community"));
+      setTimeout(() => {
+        dispatch(setGlobalAlert(""));
+      }, 5000); 
+    }
     } else {
       if (email === "" || password === "") {
-        alert("Please fill all the fields");
+        setAlert("Please fill all the fields");
       } else {
         dispatch(login({ email, password }, navigate));
+        dispatch(setGlobalAlert("Welcome back"));
+        setTimeout(() => {
+          dispatch(setGlobalAlert(""));
+        }, 5000); 
       }
     }
   };
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setAlert("");
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, [showAlert]);
   return (
     <section className="auth-section">
+      
       {isSignUp && <AboutAuth />}
       <div className="auth-container">
         {/* {isSignUp && <img width="13px" src={Logo} alt="logo" />} */}
-
+        
         <form onSubmit={handleSubmit}>
+        {alertMessage?.data && <Alert type="danger" Children={alertMessage?.data} />}
+        {showAlert && <Alert Children={showAlert} />}
           {isSignUp && (
             <label htmlFor="name">
               <h4>Display Name</h4>

@@ -7,10 +7,12 @@ import RightSideBar from "../RightSideBar/RightSideBar";
 import MainBar from "../MainSideBar/MainSideBar";
 import { postQuestion } from "../../actions/Question";
 import Alert from "../Alert/Alert";
+import { setGlobalAlert } from "../../actions/alert";
 function Questions() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   var User = useSelector((state) => state.currentUser);
+  var alertMessage = useSelector((state) => state.alert);
   const [questionTitle, setQuestionTitle] = useState("");
   const [questionBody, setQuestionBody] = useState("");
   const [questionTags, setQuestionTags] = useState("");
@@ -33,14 +35,20 @@ function Questions() {
         const questionsPostedToday=User?.postedQuestions?.filter(
           (item) => new Date(item.date).setHours(0, 0, 0, 0) === today
         );
-        alert(questionsPostedToday.length);
         if(User?.subscription==="Free" && questionsPostedToday.length>=1){
-          setAlert("You have reached your daily limit of 1 question");
+          dispatch(setGlobalAlert("You have reached your daily limit of 1 question. Upgrade you plan to post question."));
           navigate('/subscribe');
+          setTimeout(() => {
+            dispatch(setGlobalAlert(""));
+          }, 5000); 
         }
         else if(User?.subscription==="Silver" && questionsPostedToday.length>=3){
-          setAlert("You have reached your daily limit of 3 questions");
+          dispatch(setGlobalAlert("You have reached your daily limit of 3 questions. Upgrade you plan to post question."));
           navigate('/subscribe');
+          
+          setTimeout(() => {
+            dispatch(setGlobalAlert(""));
+          }, 5000); 
         }
         else{
         dispatch(
@@ -74,9 +82,10 @@ function Questions() {
   }, [showAlert]);
   return (
     // <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContents:'center'}}><h1 style={{display:'flex',alignItems:'center',justifyContents:'center'}}>Ask a public question</h1>
-    <div style={{ paddingTop: "10px" }}>
+    <div style={{ paddingTop: "5vh" }}>
       <section className="auth-section">
         <div className="auth-container">
+        {alertMessage?.data && <Alert type="success" Children={alertMessage?.data} />}
           <h1>Ask a Public Question</h1>
           <form
             onSubmit={handleSubmit}
@@ -136,7 +145,7 @@ function Questions() {
               />
             </label>
             <br />
-            <button type="submit">Review your question</button>
+            <button type="submit">Post</button>
           </form>
         </div>
       </section>

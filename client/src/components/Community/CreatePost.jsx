@@ -3,6 +3,7 @@ import ReactQuill, { Quill } from "react-quill";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
+import Alert from "../Alert/Alert";
 import LeftSideBar from "./LeftSideBar";
 import RightSideBar from "./RightSideBar";
 import { createPost } from "../../actions/community";
@@ -85,7 +86,7 @@ function CreatePost() {
           navigate
         )
       );
-
+          
       
     }
   };
@@ -113,13 +114,11 @@ function CreatePost() {
       <LeftSideBar />
       <div
         style={{
-          borderLeft: "1px solid black",
-          borderRight: "1px solid black",
           width: "100%",
           height: "100vh",
           justifyContent: "center",
           padding: "10px",
-          marginLeft: "17vw",
+          marginLeft:isSmallScreen?'12vw':'17vw',
           marginRight: isSmallScreen ? "1vw" : "24vw",
         }}
       >

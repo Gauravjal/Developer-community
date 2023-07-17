@@ -1,14 +1,19 @@
 import axios from "axios";
+import { setGlobalAlert } from "./alert";
 export const postQuestion = (questionData, history) => async (dispatch) => {
   try {
     const { data } = await axios.post(
-      "http://localhost:5000/questions/question",
+      "https://stackoverflow-clone-mfrc.onrender.com/questions/question",
       questionData
     );
     //dispatch({ type: "POST_QUESTION", payload: data });
     dispatch({ type: "UPDATE_CURRENT_USER", payload: data });
+    dispatch(setGlobalAlert("Question Posted Successfully"))
     dispatch(fetchAllQuestions());
     history("/");
+    setTimeout(() => {
+      dispatch(setGlobalAlert(""));
+    }, 5000); 
   } catch (err) {
     console.log(err);
   }

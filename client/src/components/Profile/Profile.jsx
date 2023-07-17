@@ -12,6 +12,7 @@ import { updateCurrentUser } from "../../actions/getCurrentUser";
 function Profile() {
   const dispatch = useDispatch();
   var User = useSelector((state) => state.currentUser);
+  var alertMessage=useSelector((state)=> state.alert);
   console.log("currentUser", User);
   const [showAlert, setAlert] = useState("");
   const [name, setName] = useState(User?.name);
@@ -41,6 +42,7 @@ function Profile() {
   return (
     <div className="home-main-container">
       <LeftSideBar />
+      {alertMessage?.data && <Alert type="success" Children={alertMessage?.data} />}
       <div
         style={{
           marginLeft: "14vw",

@@ -1,12 +1,26 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { ImCross } from "react-icons/im";
 import { ImCheckmark } from "react-icons/im";
 import { useSelector, useDispatch } from "react-redux";
 import { createSubscription } from "../../actions/payment";
 import { Link } from "react-router-dom";
+import Alert from "../Alert/Alert";
 function Subscribe() {
   const dispatch = useDispatch();
   var User = useSelector((state) => state.currentUser);
+  var alertMessage = useSelector((state) => state.alert);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth <= 1000); // Set the breakpoint size according to your requirements
+    };
+
+    checkScreenSize();
+
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
   return (
     <div
       style={{
@@ -17,11 +31,12 @@ function Subscribe() {
         marginTop: "10vh",
       }}
     >
+      {alertMessage?.data && <Alert type="danger" Children={alertMessage?.data} />}
       <h2>Our Subscription Plans</h2>
       <div
         style={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: isSmallScreen?"column":"row",
           width: "96%",
           justifyContent: "center",
         }}
@@ -30,14 +45,14 @@ function Subscribe() {
           style={{
             display: "flex",
             flexDirection: "column",
-            border: "1px solid black",
-            width: "30%",
+            border: "1px solid grey",
+            width: isSmallScreen?"90%":"30%",
             textAlign: "center",
             margin: "10px",
             borderRadius: "10px",
           }}
         >
-          <div style={{ backgroundColor: "#f6f7d3" }}>
+          <div style={{ backgroundColor: "#f6f7d3",border:'1px solid #f6f7d3',borderLeft: 'none',borderRight: 'none',borderRadius: "10px" }}> 
             <h1>Free</h1>
           </div>
           <h3>
@@ -45,21 +60,21 @@ function Subscribe() {
           </h3>
           {User?.subscription === "Free" ? (
             <button
-              style={{borderRadius:'20px',border:'1px solid blue', marginLeft: "20%", marginRight: "20%" }}
+              style={{borderRadius:'20px',border:'1px solid blue', marginLeft: "20%", marginRight: "20%" ,backgroundColor:'black'}}
               className="btn"
             >
               Current
             </button>
           ) : (
             <button
-            style={{
-              borderRadius:'20px',
-              border:'1px solid blue',
-            }}
+            // style={{
+            //   borderRadius:'20px',
+            //   border:'1px solid blue',
+            // }}
               onClick={() => {
                 dispatch(createSubscription({ id: User?._id, plan: "Free" }));
               }}
-              style={{ marginLeft: "20%", marginRight: "20%" }}
+              style={{borderRadius:'20px',border:'1px solid blue', marginLeft: "20%", marginRight: "20%" }}
               className="btn"
             >
               Downgrade
@@ -84,15 +99,15 @@ function Subscribe() {
           style={{
             display: "flex",
             flexDirection: "column",
-            border: "1px solid black",
+            border: "1px solid grey",
            
             textAlign: "center",
-            width: "30%",
+            width: isSmallScreen?"90%":"30%",
             margin: "10px",
             borderRadius: "10px",
           }}
         > 
-        <div style={{ backgroundColor: "silver",}}>
+        <div style={{ backgroundColor: "silver",border:'1px solid silver',borderLeft: 'none',borderRight: 'none',borderRadius: "10px" }}>
           <h1 >Silver</h1>
           </div>
           <h3>
@@ -100,7 +115,7 @@ function Subscribe() {
           </h3>
           {User?.subscription === "Silver" ? (
             <button
-              style={{borderRadius:'20px',border:'1px solid blue', marginLeft: "20%", marginRight: "20%" }}
+              style={{borderRadius:'20px',border:'1px solid blue', marginLeft: "20%", marginRight: "20%" ,backgroundColor:'black'}}
               className="btn"
             >
               Current
@@ -133,14 +148,14 @@ function Subscribe() {
           style={{
             display: "flex",
             flexDirection: "column",
-            border:'1px solid black',
+            border:'1px solid grey',
             textAlign: "center",
-            width: "30%",
+            width: isSmallScreen?"90%":"30%",
             margin: "10px",
             borderRadius: "10px",
           }}
         >
-          <div style={{ backgroundColor: "gold" }}>
+          <div style={{ backgroundColor: "gold",border:'1px solid gold',borderLeft: 'none',borderRight: 'none',borderRadius: "10px" }}>
           <h1>Gold</h1>
           </div>
           <h3>
@@ -148,7 +163,7 @@ function Subscribe() {
           </h3>
           {User?.subscription === "Gold" ? (
             <button
-              style={{borderRadius:'20px',border:'1px solid blue', marginLeft: "20%", marginRight: "20%" }}
+              style={{borderRadius:'20px',border:'1px solid blue', marginLeft: "20%", marginRight: "20%" ,backgroundColor:'black'}}
               className="btn"
             >
               Current

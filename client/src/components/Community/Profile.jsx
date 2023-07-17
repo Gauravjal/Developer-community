@@ -9,7 +9,7 @@ import { MdEdit } from "react-icons/md";
 import {useNavigate,Link} from 'react-router-dom';
 import { updateAvatar } from "../../actions/getCurrentUser";
 import Modal from "./Modal";
-
+import Alert from "../Alert/Alert";
 function Profile() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [file, setFile] = useState(null);
@@ -29,7 +29,7 @@ function Profile() {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.post);
   const user = useSelector((state) => state.currentUser);
-
+  let alertMessage=useSelector((state)=>state.alert);
   useEffect(() => {
     dispatch(fetchPosts());
     console.log(posts?.data);
@@ -43,7 +43,7 @@ function Profile() {
         setFile(reader.result);
         const formData = new FormData();
         formData.append("file", selectedFile);
-        await dispatch(updateAvatar(formData, user._id));
+        await dispatch(updateAvatar(formData, user?._id));
       };
       reader.readAsDataURL(selectedFile);
     }
@@ -64,17 +64,18 @@ function Profile() {
       <LeftSideBar />
       <div
         style={{
-          border: "1px solid black",
+          borderLeft:"none",
           borderTop: "none",
           display: "flex",
           flexDirection: "column",
           width: "100%",
-          marginLeft: "17vw",
+          marginLeft:isSmallScreen?'12vw':'17vw',
           marginRight: isSmallScreen ? "1vw" : "24vw",
           backgroundColor: "#eef1f4",
           minHeight: "100vh",
         }}
       >
+        {alertMessage?.data && <Alert type="success" Children={alertMessage?.data} />}
         <div
           style={{
             display: "flex",
@@ -136,7 +137,7 @@ function Profile() {
           <div>
             <h3>{user?.name}</h3>
             <h4>
-              <MdLocationOn />
+              {user?.location && <MdLocationOn />}
               {user?.location}
             </h4>
             <div
@@ -153,7 +154,7 @@ function Profile() {
                   textAlign: "center",
                 }}
               >
-                <Link style={{textDecoration:'none',cursor:'pointer'}}  to={`/community/followers/${user._id}`}>
+                <Link style={{textDecoration:'none',cursor:'pointer'}}  to={`/community/followers/${user?._id}`}>
                 <h1>{user?.followers?.length}</h1> Followers
                 </Link>
               </div>
@@ -166,7 +167,7 @@ function Profile() {
                   padding: "10px",
                 }}
               >
-                <Link style={{textDecoration:'none',cursor:'pointer'}} to={`/community/followers/${user._id}`}>
+                <Link style={{textDecoration:'none',cursor:'pointer'}} to={`/community/followers/${user?._id}`}>
                 <h1>{user?.following?.length}</h1> Following
                 </Link>
               </div>

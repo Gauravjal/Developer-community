@@ -9,11 +9,14 @@ import { BsQuestionCircleFill } from "react-icons/bs";
 import { IoIosPricetags } from "react-icons/io";
 import { FaUsers } from "react-icons/fa";
 import { FaUserFriends } from "react-icons/fa";
+import { useSelector,useDispatch } from "react-redux";
+import { setGlobalAlert } from "../../actions/alert.js";
 function LeftSidebar() {
+  const dispatch=useDispatch();
   const location = useLocation();
   const [showBot, setShowBot] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-
+  var User = useSelector((state) => state.currentUser);
   useEffect(() => {
     const checkScreenSize = () => {
       setIsSmallScreen(window.innerWidth <= 1000); // Set the breakpoint size according to your requirements
@@ -28,11 +31,11 @@ function LeftSidebar() {
     <nav
       style={{
         marginTop: "40px",
-        width: "15vw",
+        width: isSmallScreen?"10vw":"15vw",
         height: "100%",
         position: "fixed",
         left: "0",
-        padding: "30px 15px",
+        padding: isSmallScreen?"10px 0px":"30px 15px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -42,52 +45,61 @@ function LeftSidebar() {
       className="left-sidebar"
     >
       <div style={{ display: "flex", flexDirection: "column" }}>
-      <button style={{backgroundColor: 'inherit',
-  width: '100%',
-  border: 'none',
-  padding: '0%'}}>
-        <NavLink
-        className="side-nav-links" activeclassname="active"
+        <button
           style={{
-            textDecoration: "none",
-            color: "black",
-            backgroundColor: location.pathname === "/" ? "#696969" : "none",
+            backgroundColor: "inherit",
+            width: "100%",
+            border: "none",
+            padding: "0%",
           }}
-          to="/"
         >
-          <h5 style={{ textAlign: "left", position: "relative", left: "5%" }}>
-            <AiFillHome
-              style={{
-                width: "30px",
-              }}
-            />
-            {!isSmallScreen ? "HOME" : ""}
-          </h5>
-        </NavLink>
+          <NavLink
+            className="side-nav-links"
+            activeclassname="active"
+            style={{
+              textDecoration: "none",
+              color: "black",
+            }}
+            to="/"
+          >
+            <h5 style={{ textAlign: "left", position: "relative", left:isSmallScreen?"0%": "5%" }}>
+              <AiFillHome
+                style={{
+                  width: isSmallScreen?'':"30px",
+                }}
+              />
+              {!isSmallScreen ? "HOME" : ""}
+            </h5>
+          </NavLink>
         </button>
-        <button style={{backgroundColor: 'inherit',
-  width: '100%',
-  border: 'none',
-  padding: '0%'}}>
-        <NavLink
-        className="side-nav-links" activeclassname="active"
+        <button
           style={{
-            textDecoration: "none",
-            color: "black",
-            backgroundColor: location.pathname === "/" ? "#696969" : "none",
+            backgroundColor: "inherit",
+            width: "100%",
+            border: "none",
+            padding: "0%",
           }}
-          activeStyle={{ backgroundColor: "black" }}
-          to="/"
         >
-          <h5 style={{ textAlign: "left", position: "relative", left: "5%" }}>
-            <BsGlobeAmericas
-              style={{
-                width: "30px",
-              }}
-            />
-            {!isSmallScreen ? "PUBLIC" : ""}
-          </h5>
-        </NavLink>
+          <NavLink
+            className="side-nav-links"
+            activeclassname="active"
+            style={{
+              textDecoration: "none",
+              color: "black",
+
+            }}
+            activeStyle={{ backgroundColor: "black" }}
+            to="/public"
+          >
+            <h5 style={{ textAlign: "left", position: "relative", left: "5%" }}>
+              <BsGlobeAmericas
+                style={{
+                  width: isSmallScreen?'':"30px",
+                }}
+              />
+              {!isSmallScreen ? "PUBLIC" : ""}
+            </h5>
+          </NavLink>
         </button>
         <div
           style={{
@@ -97,141 +109,235 @@ function LeftSidebar() {
             flexDirection: "column",
           }}
         >
-           <button style={{backgroundColor: 'inherit',
-  width: '100%',
-  border: 'none',
-  padding: '0%'}}>
-          <NavLink
-          className="side-nav-links" activeclassname="active"
+          <button
             style={{
-              textDecoration: "none",
-              color: "black",
-              backgroundColor:
-                location.pathname === "/Questions" ? "#696969" : "none",
+              backgroundColor: "inherit",
+              width: "100%",
+              border: "none",
+              padding: "0%",
             }}
-            to="/Questions"
-            activeStyle={{ backgroundColor: "black" }}
           >
-            <h5
-              style={{ textAlign: "left", position: "relative", left: "20%" }}
-            >
-              <BsQuestionCircleFill
-                style={{
-                  width: "30px",
-                }}
-              />
-              {!isSmallScreen ? "QUESTIONS" : ""}
-            </h5>
-          </NavLink>
-          </button>
-          <button style={{backgroundColor: 'inherit',
-  width: '100%',
-  border: 'none',
-  padding: '0%'}}>
-          <NavLink
-          className="side-nav-links" activeclassname="active"
-            style={{
-              textDecoration: "none",
-              color: "black",
-              backgroundColor:
-                location.pathname === "/Tags" ? "#696969" : "none",
-            }}
-
-            to="/Tags"
-            activeClassName="active-link"
-          >
-            <h5
-              style={{ textAlign: "left", position: "relative", left: "20%" }}
-            >
-              <IoIosPricetags
-                style={{
-                  width: "30px",
-                }}
-              />
-              {!isSmallScreen ? "TAGS" : ""}
-            </h5>
-          </NavLink>
-          </button>
-          <button style={{backgroundColor: 'inherit',
-  width: '100%',
-  border: 'none',
-  padding: '0%'}}>
-          <NavLink
-          className="side-nav-links" activeclassname="active"
-            style={{
-              textDecoration: "none",
-              color: "black",
-              backgroundColor:
-                location.pathname === "/Users" ? "#696969" : "none",
-            }}
-
-            to="/Users"
-          >
-            <h5
-              style={{ textAlign: "left", position: "relative", left: "20%" }}
-            >
-              <FaUserFriends
-                style={{
-                  width: "30px",
-                }}
-              />
-              {!isSmallScreen ? "USERS" : ""}
-            </h5>
-          </NavLink>
-          </button>
-          <button style={{backgroundColor: 'inherit',
-  width: '100%',
-  border: 'none',
-  padding: '0%'}}>
-          <NavLink
-          className="side-nav-links" activeclassname="active"
-            style={{
-              textDecoration: "none",
-              color: "black",
-              backgroundColor:
-                location.pathname === "/Community" ? "#696969" : "none",
-            }}
-
-            to="/community"
-            activeStyle={{ backgroundColor: "black" }}
-          >
-            <h5
-              style={{ textAlign: "left", position: "relative", left: "20%" }}
-            >
-              <FaUsers
-                style={{
-                  width: "30px",
-                }}
-              />
-              {!isSmallScreen ? "COMMUNITY" : ""}
-            </h5>
-          </NavLink>
-          </button>
-          <button style={{backgroundColor: 'inherit',
-  width: '100%',
-  border: 'none',
-  padding: '0%'}}>
-          <NavLink
-          className="side-nav-links" activeclassname="active"
-          style={{
-            textDecoration: "none",
-            color: "black",
-            backgroundColor: location.pathname === "/subscribe" ? "#696969" : "none",
-          }}
-          className="item"
-          activeStyle={{ backgroundColor: "black" }}
-          to="/subscribe"
-        >
-          <h5 style={{ textAlign: "left", position: "relative", left: "5%" }}>
-            <MdWorkspacePremium
+            <NavLink
+              className="side-nav-links"
+              activeclassname="active"
               style={{
-                width: "30px",
+                textDecoration: "none",
+                color: "black",
+
               }}
-            />
-            {!isSmallScreen ? "PREMIUM" : ""}
-          </h5>
-        </NavLink>
-        </button>
+              to="/Questions"
+              activeStyle={{ backgroundColor: "black" }}
+            >
+              <h5
+                style={{ textAlign: "left", position: "relative", left: "20%" }}
+              >
+                <BsQuestionCircleFill
+                  style={{
+                    width: isSmallScreen?'':"30px",
+                  }}
+                />
+                {!isSmallScreen ? "QUESTIONS" : ""}
+              </h5>
+            </NavLink>
+          </button>
+          <button
+            style={{
+              backgroundColor: "inherit",
+              width: "100%",
+              border: "none",
+              padding: "0%",
+            }}
+          >
+            <NavLink
+              className="side-nav-links"
+              activeclassname="active"
+              style={{
+                textDecoration: "none",
+                color: "black",
+
+
+              }}
+              to="/Tags"
+              activeClassName="active-link"
+            >
+              <h5
+                style={{ textAlign: "left", position: "relative", left: "20%" }}
+              >
+                <IoIosPricetags
+                  style={{
+                    width: isSmallScreen?'':"30px",
+                  }}
+                />
+                {!isSmallScreen ? "TAGS" : ""}
+              </h5>
+            </NavLink>
+          </button>
+          <button
+            style={{
+              backgroundColor: "inherit",
+              width: "100%",
+              border: "none",
+              padding: "0%",
+            }}
+          >
+            <NavLink
+              className="side-nav-links"
+              activeclassname="active"
+              style={{
+                textDecoration: "none",
+                color: "black",
+
+              }}
+              to="/Users"
+            >
+              <h5
+                style={{ textAlign: "left", position: "relative", left: "20%" }}
+              >
+                <FaUserFriends
+                  style={{
+                    width: isSmallScreen?'':"30px",
+                  }}
+                />
+                {!isSmallScreen ? "USERS" : ""}
+              </h5>
+            </NavLink>
+          </button>
+          <button
+            style={{
+              backgroundColor: "inherit",
+              width: "100%",
+              border: "none",
+              padding: "0%",
+            }}
+            onClick={()=>{
+              if(!User){
+              dispatch(setGlobalAlert("Please login or sign up to view community!"));
+              setTimeout(() => {
+                dispatch(setGlobalAlert(""));
+              }, 5000); 
+            }
+            }}
+          >
+            {User?
+            (
+            <NavLink
+              className="side-nav-links"
+              activeclassname="active"
+              style={{
+                textDecoration: "none",
+                color: "black",
+              }}
+              to="/community"
+              activeStyle={{ backgroundColor: "black" }}
+            >
+              <h5
+                style={{ textAlign: "left", position: "relative", left: "20%" }}
+              >
+                <FaUsers
+                  style={{
+                    width: isSmallScreen?'':"30px",
+                  }}
+                />
+                {!isSmallScreen ? "COMMUNITY" : ""}
+              </h5>
+            </NavLink>):(
+            <NavLink
+              className="side-nav-links"
+              activeclassname="active"
+              style={{
+                textDecoration: "none",
+                color: "black",
+              }}
+              to="/auth"
+              activeStyle={{ backgroundColor: "black" }}
+            >
+              <h5
+                style={{ textAlign: "left", position: "relative", left: "20%" }}
+              >
+                <FaUsers
+                  style={{
+                    width: isSmallScreen?'':"30px",
+                  }}
+                />
+                {!isSmallScreen ? "COMMUNITY" : ""}
+              </h5>
+            </NavLink>)
+            
+}
+          </button>
+          <button
+            onClick={()=>{
+              if(User){
+              dispatch(setGlobalAlert("Subscribe to our plans and enjoy premium benifits"));
+              setTimeout(() => {
+                dispatch(setGlobalAlert(""));
+              }, 5000); 
+              }
+              else{
+              dispatch(setGlobalAlert("Please login or sign up to subscribe!"));
+              setTimeout(() => {
+                dispatch(setGlobalAlert(""));
+              }, 5000); 
+              }
+            }}
+
+            
+            style={{
+              backgroundColor: "inherit",
+              width: "100%",
+              border: "none",
+              padding: "0%",
+            }}
+          >
+            {User?
+            (
+            <NavLink
+              className="side-nav-links"
+              activeclassname="active"
+              style={{
+                textDecoration: "none",
+                color: "black",
+
+              }}
+              activeStyle={{ backgroundColor: "black" }}
+              to="/subscribe"
+            >
+              <h5
+                style={{ textAlign: "left", position: "relative", left: "5%" }}
+              >
+                <MdWorkspacePremium
+                  style={{
+                    width: isSmallScreen?'':"30px",
+                  }}
+                />
+                {!isSmallScreen ? "PREMIUM" : ""}
+              </h5>
+            </NavLink>
+            ):(
+              <NavLink
+              className="side-nav-links"
+              activeclassname="active"
+              style={{
+                textDecoration: "none",
+                color: "black",
+
+              }}
+              activeStyle={{ backgroundColor: "black" }}
+              to="/auth"
+            >
+              <h5
+                style={{ textAlign: "left", position: "relative", left: "5%" }}
+              >
+                <MdWorkspacePremium
+                  style={{
+                    width: isSmallScreen?'':"30px",
+                  }}
+                />
+                {!isSmallScreen ? "PREMIUM" : ""}
+              </h5>
+            </NavLink>
+            )}
+          </button>
         </div>
       </div>
       <li style={{ display: "flex" }}>
@@ -280,7 +386,7 @@ function LeftSidebar() {
             >
               Close ChatBot
             </button>
-            <Chat showBot={showBot} setShowBot={setShowBot}/>
+            <Chat showBot={showBot} setShowBot={setShowBot} />
           </div>
         )}
       </li>

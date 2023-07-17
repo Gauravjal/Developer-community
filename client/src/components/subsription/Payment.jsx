@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { createSubscription } from "../../actions/payment";
+import { setGlobalAlert } from "../../actions/alert";
 import {
   Elements,
   CardElement,
@@ -11,7 +12,7 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import "./Payment.css";
 import axios from "axios";
-
+import Alert from "../Alert/Alert";
 const App = () => {
   // Include stripe published key here
   const stripe = loadStripe(
@@ -75,8 +76,15 @@ function CheckoutForm() {
       } else {
         if (paymentResult.paymentIntent.status === "succeeded") {
           dispatch(createSubscription({ id: User?._id, plan: plan }));
-          navigate("/subscribe");
-          alert(plan);
+          navigate("/AskQuestion");
+          dispatch(
+            setGlobalAlert(
+              "Payment Successful. Congrates you are now our premium member."
+            )
+          );
+          setTimeout(() => {
+            dispatch(setGlobalAlert(""));
+          }, 5000); 
         }
       }
     }
@@ -93,7 +101,6 @@ function CheckoutForm() {
       dispatch(createSubscription({ id: User?._id, plan: plan }));
     } else {
       if (paymentResult.paymentIntent.status === "succeeded") {
-      
         alert("Success!");
       }
     }
@@ -102,34 +109,32 @@ function CheckoutForm() {
   return (
     <div
       style={{
-        display:'flex',
-        marginTop:'6vh',
-         height:'90vh',
+        display: "flex",
+        marginTop: "6vh",
+        height: "90vh",
         // margin:'auto',
-         justifyContent:'center',
-        alignItems:'center',
-        backgroundColor:'grey'
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "grey",
       }}
     >
-
       <div
         style={{
-          marginTop:'40vh',
-          width:'400px',
+          marginTop: "40vh",
+          width: "300px",
           margin: "0 auto",
-          backgroundColor:'white',
-          padding:'10px',
-          borderRadius:'10px',
-          boxShadow:'2px 2px 2px 2px #888888'
+          backgroundColor: "white",
+          padding: "10px",
+          borderRadius: "10px",
+          boxShadow: "2px 2px 2px 2px #888888",
         }}
       >
-        <h1 style={{textAlign:'center'}}>Payment</h1>
+        <h1 style={{ textAlign: "center" }}>Payment</h1>
         <h2>{plan} Plan</h2>
         <form
           style={{
             display: "block",
             width: "100%",
-           
           }}
           onSubmit={payMoney}
         >
@@ -138,7 +143,6 @@ function CheckoutForm() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-             
             }}
           >
             <CardElement

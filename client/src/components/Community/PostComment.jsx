@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
 import { postComment } from "../../actions/community";
+import Alert from "../Alert/Alert";
 const CustomBackground = Quill.import("attributors/style/background");
 CustomBackground.whitelist = [
   "white",
@@ -18,6 +19,7 @@ function PostComment({ id }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   var User = useSelector((state) => state.currentUser);
+  let alertMessage=useSelector((state)=>state.alert);
   const [text, setText] = useState("");
 
   const handleTextChange = (value) => {
@@ -43,7 +45,7 @@ function PostComment({ id }) {
         )
       );
 
-    console.log("Text:", text);
+      setText("");
   };
 
   useEffect(() => {
@@ -76,9 +78,10 @@ function PostComment({ id }) {
         display: "flex",
         paddingTop: "50px",
         width: "100%",
-        
+        flexDirection:'column'
       }}
     >
+      {alertMessage?.data && <Alert type="success" Children={alertMessage?.data} />}
       <div
         style={{
           //   borderLeft: "1px solid black",

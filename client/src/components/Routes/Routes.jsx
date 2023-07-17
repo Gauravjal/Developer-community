@@ -26,6 +26,7 @@ function AllRoutes() {
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/public" element={<Home />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/Questions" element={<Questions />} />
         <Route path="/AskQuestion" element={<AskQuestion />} />

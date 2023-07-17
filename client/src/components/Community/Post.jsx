@@ -12,6 +12,7 @@ import { likePost } from "../../actions/community";
 import { likeComment } from "../../actions/community";
 import { useLocation } from "react-router-dom";
 import {MdOutlineUpdate} from "react-icons/md"
+import Alert from "../Alert/Alert";
 import Comments from "./Comments";
 import { Link } from "react-router-dom";
 function Post({ children }) {
@@ -20,6 +21,7 @@ function Post({ children }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.currentUser);
+  let alertMessage=useSelector((state)=>state.alert);
   const [showComments, setShowComments] = useState(false);
 
   return (
@@ -230,6 +232,7 @@ function Post({ children }) {
       </div>
       {showComments && (
         <div style={{ width: "100%", marginTop: "10px" }}>
+          
           <PostComment id={children?._id} />
           <strong>Comments</strong>
           {children?.comments?.map((comment) => {

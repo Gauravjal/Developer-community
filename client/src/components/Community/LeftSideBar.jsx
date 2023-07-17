@@ -13,7 +13,7 @@ function LeftSideBar() {
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsSmallScreen(window.innerWidth <= 768); // Set the breakpoint size according to your requirements
+      setIsSmallScreen(window.innerWidth <= 1000); // Set the breakpoint size according to your requirements
     };
 
     checkScreenSize();
@@ -25,21 +25,20 @@ function LeftSideBar() {
     <div
       className="navigation"
       style={{
-        width: isSmallScreen ? "10vw" : "15vw",
+        width: isSmallScreen ? "8vw" : "15vw",
         height: "100%",
         position: "fixed",
         left: "0",
         padding: "30px 15px",
-        // backgroundColor:'blue',
         background: "#2b343b",
         // backdropFilter: "blur(5px)",
         trainsition: "width 0.5s",
-        boxShadow: "10px 0 0 #4187f6",
+        boxShadow: "5px 0 0 #4187f6",
       }}
     >
       <ul
         style={{ listStyle: "none", position: "relative",
-         padding: "0 15px"
+         padding: isSmallScreen?"0 10px":"0 15px"
          }}
       >
         <li
@@ -60,8 +59,7 @@ function LeftSideBar() {
             style={{
               textDecoration: "none",
               display: "flex",
-              background:
-                location.pathname === "/community" ? "#4187f6" : "#2b343b",
+
               //onHover:{color:"red}
             }}
             to="/community"
@@ -69,12 +67,13 @@ function LeftSideBar() {
             {isSmallScreen ? (
               <AiFillHome
                 style={{
-                  width: "30px",
-                  marginRight: "10px",
+                  marginRight: "20px",
                   color: "#fff",
                   display: "flex",
                   background:
-              location.pathname === "/community" ? "#4187f6" : "#2b343b",
+                  location.pathname === "/community" ? "#4187f6" : "#2b343b",
+                  padding:'2vw',
+                  paddingRight:'3vw'
                 }}
               />
             ) : (
@@ -108,7 +107,7 @@ function LeftSideBar() {
             justifyContent: "flex-start",
             cursor: "pointer",
             borderRadius: "10px",
-            padding: "10px",
+            padding: "1vw",
             background:
               location.pathname === "/community/explore"
                 ? "#4187f6"
@@ -122,10 +121,14 @@ function LeftSideBar() {
             {isSmallScreen ? (
               <AiOutlineSearch
                 style={{
-                  width: "30px",
-                  marginRight: "10px",
+
+                  marginRight: "20px",
                   color: "#fff",
                   display: "flex",
+                  background:
+                  location.pathname === "/community/explore" ? "#4187f6" : "#2b343b",
+                  padding:'2vw',
+                  paddingRight:'3vw'
                 }}
               />
             ) : (
@@ -160,7 +163,7 @@ function LeftSideBar() {
             justifyContent: "flex-start",
             cursor: "pointer",
             borderRadius: "10px",
-            padding: "10px",
+            padding: "1vw",
             background:
               location.pathname === "/community/notifications"
                 ? "#4187f6"
@@ -174,10 +177,14 @@ function LeftSideBar() {
             {isSmallScreen ? (
               <MdNotifications
                 style={{
-                  width: "30px",
-                  marginRight: "10px",
+
+                  marginRight: "20px",
                   color: "#fff",
                   display: "flex",
+                  background:
+                  location.pathname === "/community/notifications" ? "#4187f6" : "#2b343b",
+                  padding:'2vw',
+                  paddingRight:'3vw'
                 }}
               />
             ) : (
@@ -213,7 +220,7 @@ function LeftSideBar() {
             justifyContent: "flex-start",
             cursor: "pointer",
             borderRadius: "10px",
-            padding: "10px",
+            padding: "1vw",
             background:
               location.pathname === "/community/profile"
                 ? "#4187f6"
@@ -227,10 +234,14 @@ function LeftSideBar() {
             {isSmallScreen ? (
               <RxAvatar
                 style={{
-                  width: "30px",
-                  marginRight: "10px",
+                  marginRight: "20px",
                   color: "#fff",
                   display: "flex",
+
+                  background:
+                  location.pathname === "/community/profile" ? "#4187f6" : "#2b343b",
+                  padding:'2vw',
+                  paddingRight:'3vw'
                 }}
               />
             ) : (
@@ -264,7 +275,7 @@ function LeftSideBar() {
             justifyContent: "flex-start",
             cursor: "pointer",
             borderRadius: "10px",
-            padding: "10px",
+            padding: "1vw",
             background:
               location.pathname === "/community/post" ? "#4187f6" : "#2b343b",
           }}
@@ -276,10 +287,13 @@ function LeftSideBar() {
             {isSmallScreen ? (
               <BiMessageSquareAdd
                 style={{
-                  width: "30px",
-                  marginRight: "10px",
+                  marginRight: "20px",
                   color: "#fff",
                   display: "flex",
+                  background:
+                  location.pathname === "/community/post" ? "#4187f6" : "#2b343b",
+                 padding:'2vw',
+                 paddingRight:'3vw'
                 }}
               />
             ) : (

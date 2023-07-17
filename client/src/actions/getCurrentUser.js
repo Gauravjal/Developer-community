@@ -1,4 +1,5 @@
 import axios from "axios";
+import { setGlobalAlert } from "./alert";
 export const getCurrentUser = (data) => {
   return {
     type: "GET_CURRENT_USER",
@@ -13,6 +14,10 @@ export const updateCurrentUser = (userData) => async (dispatch) => {
       userData
     );
     dispatch(getCurrentUser(data));
+    dispatch(setGlobalAlert("Profile updated successfully"));
+    setTimeout(() => {
+      dispatch(setGlobalAlert(""));
+    }, 5000); 
     dispatch({ type: "UPDATE_CURRENT_USER", payload: data });
   } catch (err) {
     console.log(err);
@@ -24,10 +29,14 @@ export const updateAvatar = (formData,id) => async (dispatch) => {
     alert(id);
     console.log("famdata",formData);
     const { data } = await axios.post(
-      `http://localhost:5000/users/avatar/${id}`,
+      `https://stackoverflow-clone-mfrc.onrender.com/users/avatar/${id}`,
       formData
     );
     dispatch(getCurrentUser(data));
+    dispatch(setGlobalAlert("Avatar updated successfully"));
+    setTimeout(() => {
+      dispatch(setGlobalAlert(""));
+    }, 5000); 
     dispatch({ type: "UPDATE_CURRENT_USER", payload: data });
   } catch (err) {
     console.log(err);

@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllUsers } from "../../actions/getAllUsers";
 import { Link } from "react-router-dom";
+import Alert from "../Alert/Alert";
 import LeftSidebar from "../LeftSideBar/LeftSidebar";
 function User() {
   const Users = useSelector((state) => state.Users);
+  const alertMessage = useSelector((state) => state.alert);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,7 +24,7 @@ function User() {
       }}
     >
       <LeftSidebar />
-      <div  className="user-list-container" style={{ marginLeft: "16vw", width: "70vw",marginTop:'20vh' }}>
+      <div  className="user-list-container" style={{ marginLeft: "16vw", width: "70vw",marginTop:'10vh' }}>
         {Users?.data?.map((item) => {
           return (
             <div

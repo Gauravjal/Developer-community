@@ -3,6 +3,7 @@ import { BiLike } from "react-icons/bi";
 import { FaRegComments } from "react-icons/fa";
 import { BiShare } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import Alert from "../Alert/Alert";
 function Comments({ children }) {
   const navigate=useNavigate();
   return (

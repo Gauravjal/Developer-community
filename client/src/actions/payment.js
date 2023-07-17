@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const addCredits = (token) => async (dispatch) => {
   const response = await axios.post(
-    "http://localhost:5000/payment/create-charges",
+    "https://stackoverflow-clone-mfrc.onrender.com/payment/create-charges",
     token
   );
 
@@ -18,7 +18,7 @@ export const addCredits = (token) => async (dispatch) => {
 
 export const createSubscription=(id,plan)=>async (dispatch)=>{
   const response=await axios.patch(
-    "http://localhost:5000/payment/subscription",
+    "https://stackoverflow-clone-mfrc.onrender.com/payment/subscription",
     id,plan
   );
   console.log(response.data);

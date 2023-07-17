@@ -28,12 +28,13 @@ function Explore() {
       <LeftSideBar />
       <div
         style={{
-          border: "1px solid black",
+
+          borderLeft:"none",
           borderTop: "none",
           display: "flex",
           flexDirection: "column",
           width: "100%",
-          marginLeft:'17vw'
+          marginLeft:isSmallScreen?'12vw':'17vw'
           ,marginRight:isSmallScreen?'1vw':'24vw' 
         }}
       >
@@ -48,8 +49,6 @@ function Explore() {
         </div>
         <div
           style={{
-            overflow: "scroll",
-            height: "80vh",
             display: "flex",
             flexDirection: "column",
             padding: "10px",

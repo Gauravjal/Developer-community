@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {MdOutlineUpdate} from "react-icons/md"
+import { MdOutlineUpdate } from "react-icons/md";
 import LeftSideBar from "./LeftSideBar";
 import RightSideBar from "./RightSideBar";
 
@@ -37,18 +37,18 @@ function Notification() {
       <LeftSideBar />
       <div
         style={{
-          border: "1px solid grey",
+          borderLeft:"none",
           borderTop: "none",
           display: "flex",
           flexDirection: "column",
           width: "100%",
           minHeight: "100vh",
-          marginLeft: "17vw",
+          marginLeft:isSmallScreen?'12vw':'17vw',
           marginRight: isSmallScreen ? "1vw" : "24vw",
           backgroundColor: "#eef1f4",
         }}
       >
-        <h1 style={{ textAlign: "center" }}>Notfications</h1>
+        <h1 style={{ textAlign: "center" }}>Notifications</h1>
         {user?.notifications?.map((notification) => {
           return (
             <>
@@ -59,30 +59,38 @@ function Notification() {
                     borderRadius: "10px",
                     padding: "10px",
                     margin: "10px",
-                    display:'flex',
-                    alignItems:'center',
-                    backgroundColor:'#fff',
-                    justifyContent:'space-between'
+                    display: "flex",
+                    alignItems: "center",
+                    backgroundColor: "#fff",
+                    justifyContent: "space-between",
                   }}
                 >
-                    <div style={{
-          display: "flex",
-          alignItems: "center",
-          marginBottom: "10px",
-        }}>
-                  <img
-                    width="5%"
+                  <div
                     style={{
-                      borderRadius: "50%",
-                      marginRight: "10px",
-                      border: "1px solid grey",
+                      display: "flex",
+                      alignItems: "center",
+                      marginBottom: "10px",
                     }}
-                    alt="profile PIC"
-                    src={`http://localhost:5000/uploads/${notification?.avatar}`}
-                  />
-                   <strong style={{marginRight:'10px'}}>{notification.name}</strong> liked your post
-                   </div>
-                   <p><MdOutlineUpdate/>{moment(notification.date).fromNow()}</p>
+                  >
+                    <img
+                      width="5%"
+                      style={{
+                        borderRadius: "50%",
+                        marginRight: "10px",
+                        border: "1px solid grey",
+                      }}
+                      alt="profile PIC"
+                      src={`http://localhost:5000/uploads/${notification?.avatar}`}
+                    />
+                    <strong style={{ marginRight: "10px" }}>
+                      {notification.name}
+                    </strong>{" "}
+                    liked your post
+                  </div>
+                  <p>
+                    <MdOutlineUpdate />
+                    {moment(notification.date).fromNow()}
+                  </p>
                 </div>
               )}
               {notification?.val === "likeComment" && (
@@ -92,30 +100,38 @@ function Notification() {
                     borderRadius: "10px",
                     padding: "10px",
                     margin: "10px",
-                    display:'flex',
-                    alignItems:'center',
-                    backgroundColor:'#fff',
-                    justifyContent:'space-between'
+                    display: "flex",
+                    alignItems: "center",
+                    backgroundColor: "#fff",
+                    justifyContent: "space-between",
                   }}
                 >
-                    <div style={{
-          display: "flex",
-          alignItems: "center",
-          marginBottom: "10px",
-        }}>
-                  <img
-                    width="5%"
+                  <div
                     style={{
-                      borderRadius: "50%",
-                      marginRight: "10px",
-                      border: "1px solid grey",
+                      display: "flex",
+                      alignItems: "center",
+                      marginBottom: "10px",
                     }}
-                    alt="profile PIC"
-                    src={`http://localhost:5000/uploads/${notification?.avatar}`}
-                  />
-                   <strong style={{marginRight:'10px'}}>{notification.name}</strong> liked your comment
-                   </div>
-                   <p><MdOutlineUpdate/>{moment(notification.date).fromNow()}</p>
+                  >
+                    <img
+                      width="5%"
+                      style={{
+                        borderRadius: "50%",
+                        marginRight: "10px",
+                        border: "1px solid grey",
+                      }}
+                      alt="profile PIC"
+                      src={`http://localhost:5000/uploads/${notification?.avatar}`}
+                    />
+                    <strong style={{ marginRight: "10px" }}>
+                      {notification.name}
+                    </strong>{" "}
+                    liked your comment
+                  </div>
+                  <p>
+                    <MdOutlineUpdate />
+                    {moment(notification.date).fromNow()}
+                  </p>
                 </div>
               )}
               {notification?.val === "Comment" && (
@@ -125,64 +141,80 @@ function Notification() {
                     borderRadius: "10px",
                     padding: "10px",
                     margin: "10px",
-                    display:'flex',
-                    alignItems:'center',
-                    backgroundColor:'#fff',
-                    justifyContent:'space-between'
+                    display: "flex",
+                    alignItems: "center",
+                    backgroundColor: "#fff",
+                    justifyContent: "space-between",
                   }}
                 >
-                    <div style={{
-          display: "flex",
-          alignItems: "center",
-          marginBottom: "10px",
-        }}>
-                  <img
-                    width="5%"
+                  <div
                     style={{
-                      borderRadius: "50%",
-                      marginRight: "10px",
-                      border: "1px solid grey",
+                      display: "flex",
+                      alignItems: "center",
+                      marginBottom: "10px",
                     }}
-                    alt="profile PIC"
-                    src={`http://localhost:5000/uploads/${notification?.avatar}`}
-                  />
-                   <strong style={{marginRight:'10px'}}>{notification.name}</strong> commented on your post
-                   </div>
-                   <p><MdOutlineUpdate/>{moment(notification.date).fromNow()}</p>
+                  >
+                    <img
+                      width="5%"
+                      style={{
+                        borderRadius: "50%",
+                        marginRight: "10px",
+                        border: "1px solid grey",
+                      }}
+                      alt="profile PIC"
+                      src={`http://localhost:5000/uploads/${notification?.avatar}`}
+                    />
+                    <strong style={{ marginRight: "10px" }}>
+                      {notification.name}
+                    </strong>{" "}
+                    commented on your post
+                  </div>
+                  <p>
+                    <MdOutlineUpdate />
+                    {moment(notification.date).fromNow()}
+                  </p>
                 </div>
               )}
 
-{notification?.val === "following" && (
+              {notification?.val === "following" && (
                 <div
                   style={{
                     border: "1px solid grey",
                     borderRadius: "10px",
                     padding: "10px",
                     margin: "10px",
-                    display:'flex',
-                    alignItems:'center',
-                    backgroundColor:'#fff',
-                    justifyContent:'space-between'
+                    display: "flex",
+                    alignItems: "center",
+                    backgroundColor: "#fff",
+                    justifyContent: "space-between",
                   }}
                 >
-                    <div style={{
-          display: "flex",
-          alignItems: "center",
-          marginBottom: "10px",
-        }}>
-                  <img
-                    width="5%"
+                  <div
                     style={{
-                      borderRadius: "50%",
-                      marginRight: "10px",
-                      border: "1px solid grey",
+                      display: "flex",
+                      alignItems: "center",
+                      marginBottom: "10px",
                     }}
-                    alt="profile PIC"
-                    src={`http://localhost:5000/uploads/${notification?.avatar}`}
-                  />
-                   <strong style={{marginRight:'10px'}}>{notification.name}</strong> started following you
-                   </div>
-                   <p><MdOutlineUpdate/>{moment(notification.date).fromNow()}</p>
+                  >
+                    <img
+                      width="5%"
+                      style={{
+                        borderRadius: "50%",
+                        marginRight: "10px",
+                        border: "1px solid grey",
+                      }}
+                      alt="profile PIC"
+                      src={`http://localhost:5000/uploads/${notification?.avatar}`}
+                    />
+                    <strong style={{ marginRight: "10px" }}>
+                      {notification.name}
+                    </strong>{" "}
+                    started following you
+                  </div>
+                  <p>
+                    <MdOutlineUpdate />
+                    {moment(notification.date).fromNow()}
+                  </p>
                 </div>
               )}
             </>

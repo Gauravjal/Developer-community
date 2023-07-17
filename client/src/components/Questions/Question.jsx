@@ -16,6 +16,7 @@ import { postAnswer } from "../../actions/Question";
 import { deleteQuestion } from "../../actions/Question";
 import { voteQuestion } from "../../actions/Question";
 import { deleteAnswer } from "../../actions/Question";
+import { setGlobalAlert } from "../../actions/alert";
 import Alert from "../Alert/Alert";
 function Question() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ function Question() {
   let { id } = useParams();
   var location = useLocation();
   var questionList = useSelector((state) => state.question);
+  let alertMessage=useSelector((state)=>state.alert);
   var User = useSelector((state) => state.currentUser);
   const url = "http://localhost:3000";
   console.log(questionList);
@@ -50,9 +52,10 @@ function Question() {
             userId: User._id,
           })
         );
+        dispatch(setGlobalAlert("Answer posted successfully"));
         console.log({ answerBody });
       } else {
-        setAlert("Please enter answer");
+        dispatch(setGlobalAlert("Please enter answer"));
       }
     }
   };
@@ -64,14 +67,28 @@ function Question() {
 
     return () => clearTimeout(timeout);
   }, [showAlert]);
+
+
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth <= 1000); // Set the breakpoint size according to your requirements
+    };
+
+    checkScreenSize();
+
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
   return (
     <div className="home-main-container">
       <LeftSideBar />
-      <div style={{ display: "flex", marginLeft: "17vw" }}>
+      <div style={{ display: "flex", marginLeft:isSmallScreen?"7vw": "17vw",marginTop:'5vh' }}>
         <div
           style={{
             display: "flex",
-            width: "400px",
+            width: "80vw",
             flexDirection: "column",
             float: "left",
           }}
@@ -219,6 +236,7 @@ function Question() {
                                 }}
                                 onClick={() => {
                                   dispatch(deleteQuestion(id, navigate));
+                                  dispatch(setGlobalAlert("Question deleted successfully"));
                                 }}
                               >
                                 delete
@@ -250,6 +268,7 @@ function Question() {
                     </section>
                     <h3>{item.noOfAnswers} answers</h3>
                     <section>
+                    
                       {item.answer.map((ans) => {
                         return (
                           <div
@@ -313,6 +332,7 @@ function Question() {
                                     }}
                                     onClick={() => {
                                       dispatch(deleteAnswer(item._id, ans._id));
+                                      dispatch(setGlobalAlert("Answer deleted successfully"));
                                     }}
                                   >
                                     delete
@@ -357,14 +377,16 @@ function Question() {
               width: "calc( 100% - 300px - 24px )",
             }}
           >
+             {alertMessage?.data && <Alert type="success" Children={alertMessage?.data} />}
             <h1>Your Answer</h1>
+           
             <form onSubmit={handleSubmit}>
               <textarea
                 style={{
                   padding: "10px",
                   border: "solid 1px rgba(0, 0, 0, 0.3)",
                   fontFamily: 'Roboto", sans-serif',
-                  width: "50vw",
+                  width: "70vw",
                   resize: "vertical",
                 }}
                 rows="10"
