@@ -2,7 +2,13 @@ import mongoose from "mongoose";
 import User from "../models/User.js";
 import multer from "multer";
 import path from "path";
-
+import cloudinary from "cloudinary";
+import fileupload from "express-fileupload";
+cloudinary.config({
+  cloud_name: "desodh4jk",
+  api_key: "869481522154284",
+  api_secret: "k-0UalSHVgH3Wa2aMp7Ppq-OwuU",
+});
 const storage = multer.diskStorage({
   destination: "./uploads",
   filename: (req, file, cb) => {
@@ -28,26 +34,44 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ storage, fileFilter });
 
 export const updateAvatar = async (req, res) => {
-  upload.single("file")(req, res, async (err) => {
-    if (err) {
-      console.error("Error uploading file:", err);
-      res.status(500).json({ error: "Failed to upload file" });
-    } else {
-      try {
-        const fileName = req.file.filename;
-        const { id: _id } = req.params;
-
-        let user = await mongoose.model("User").findById(_id);
-        console.log(user);
-        user.avatar = fileName;
-        user.save();
-        console.log("File uploaded successfully");
-        res.json(user);
-      } catch (err) {
-        res.status(400).json("Error");
-      }
+  console.log("files", req.files);
+  let result;
+  try {
+    result = await cloudinary.uploader.upload(req.files.file.tempFilePath, {
+      public_id: `${Date.now()}`,
+      resource_type: "auto",
+    });
+    //console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+  // upload.single("file")(req, res, async (err) => {
+  // if (err) {
+  //   const { id: _id } = req.params;
+  //   console.log(_id);
+  //   // console.error("Error uploading file:", err);
+  //   res.status(500).json({ error: "Failed to upload file" });
+  // } else {
+  try {
+    //const fileName = req.file.filename;
+    const { id: _id } = req.params;
+    // let user = await mongoose.model("User").findById(_id);
+    console.log(_id);
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+      return res.status(404).json({ message: "No user with this id" });
     }
-  });
+    const user = await mongoose.model("User").findById(_id);
+    console.log("user", user);
+    user.avatar = result.url;
+    user.save();
+    console.log("File uploaded successfully");
+    res.json(user);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json("Error");
+  }
+  // }
+  // });
 };
 
 export const fetchUsers = async (req, res) => {

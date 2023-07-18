@@ -3,6 +3,13 @@ import Post from "../models/Post.js";
 import User from "../models/User.js";
 import multer from "multer";
 import path from "path";
+import cloudinary from "cloudinary";
+import fileupload from "express-fileupload";
+cloudinary.config({
+  cloud_name: "desodh4jk",
+  api_key: "869481522154284",
+  api_secret: "k-0UalSHVgH3Wa2aMp7Ppq-OwuU",
+});
 const storage = multer.diskStorage({
   destination: "./uploads",
   filename: (req, file, cb) => {
@@ -27,21 +34,56 @@ const fileFilter = (req, file, cb) => {
   }
 };
 const upload = multer({ storage, fileFilter });
-
+let filles = [];
 export const uploadFiles = async (req, res) => {
-  upload.array("files")(req, res, (err) => {
-    if (err) {
-      console.error("Error uploading files:", err);
-      res.status(500).json({ error: "Failed to upload files" });
-    } else {
-      const files = req.files.map((file) => file.filename);
-      res.json({ files });
-    }
-  });
+  filles=[];
+  // console.log("files", req.files.files[0]);
+  try {
+    if (!req.files.files[0]) {
+      const result = await cloudinary.uploader.upload(
+        req.files.files.tempFilePath,
+        {
+          public_id: `${Date.now()}`,
+          resource_type: "auto",
+        }
+      );
+      console.log(result);
+      filles.push(result.url);
+    } else
+      for (let i = 0; i < req.files.files.length; i++) {
+        const result = await cloudinary.uploader.upload(
+          req.files.files[i].tempFilePath,
+          {
+            public_id: `${Date.now()}`,
+            resource_type: "auto",
+          }
+        );
+        console.log(result);
+        filles.push(result.url);
+      }
+
+    return res.status(200).json("Files uploaded successfully");
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json(err);
+  }
 };
+// upload.array("files")(req, res, (err) => {
+//   if (err) {
+//     console.error("Error uploading files:", err);
+//     res.status(500).json({ error: "Failed to upload files" });
+//   } else {
+//     const files = req.files.map((file) => file.filename);
+
+//     res.json({ files });
+//   }
+// });
+// };
 
 export const createPost = async (req, res) => {
-  const postData = req.body;
+  console.log(filles);
+  let postData = req.body;
+  postData.files=filles;
   const post = new Post({ ...postData });
   try {
     const savedPost = await post.save();
@@ -78,13 +120,13 @@ export const postComment = async (req, res) => {
       userId,
     });
     post.save();
-    let temp= await mongoose.model("User").findById(userId);
+    let temp = await mongoose.model("User").findById(userId);
     let user = await mongoose.model("User").findById(post.userId);
     user.notifications.push({
       date: Date.now(),
       val: "Comment",
       name: temp.name,
-      avatar:temp.avatar
+      avatar: temp.avatar,
     });
     user.save();
     return res.status(200).json(post);
@@ -115,13 +157,13 @@ export const likePost = async (req, res) => {
     }
     post.save();
     console.log(post.userId);
-    let temp= await mongoose.model("User").findById(userId);
+    let temp = await mongoose.model("User").findById(userId);
     let user = await mongoose.model("User").findById(post.userId);
     user.notifications.push({
       date: Date.now(),
       val: "likePost",
       name: temp.name,
-      avatar:temp.avatar
+      avatar: temp.avatar,
     });
     user.save();
     return res.status(200).json(post);
@@ -151,7 +193,7 @@ export const likeComment = async (req, res) => {
           );
         } else {
           post.comments[i].likes.push(String(userId));
-          let temp= await mongoose.model("User").findById(userId);
+          let temp = await mongoose.model("User").findById(userId);
           let user = await mongoose
             .model("User")
             .findById(post.comments[i].userId);
@@ -159,8 +201,7 @@ export const likeComment = async (req, res) => {
             date: Date.now(),
             val: "likeComment",
             name: temp.name,
-            avatar:temp.avatar
-          
+            avatar: temp.avatar,
           });
           user.save();
         }

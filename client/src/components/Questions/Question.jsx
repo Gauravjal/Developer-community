@@ -24,7 +24,7 @@ function Question() {
   let { id } = useParams();
   var location = useLocation();
   var questionList = useSelector((state) => state.question);
-  let alertMessage=useSelector((state)=>state.alert);
+  let alertMessage = useSelector((state) => state.alert);
   var User = useSelector((state) => state.currentUser);
   const url = "http://localhost:3000";
   console.log(questionList);
@@ -53,9 +53,15 @@ function Question() {
           })
         );
         dispatch(setGlobalAlert("Answer posted successfully"));
+        setTimeout(() => {
+          dispatch(setGlobalAlert(""));
+        }, 5000);
         console.log({ answerBody });
       } else {
         dispatch(setGlobalAlert("Please enter answer"));
+        setTimeout(() => {
+          dispatch(setGlobalAlert(""));
+        }, 5000);
       }
     }
   };
@@ -67,7 +73,6 @@ function Question() {
 
     return () => clearTimeout(timeout);
   }, [showAlert]);
-
 
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
@@ -84,7 +89,13 @@ function Question() {
   return (
     <div className="home-main-container">
       <LeftSideBar />
-      <div style={{ display: "flex", marginLeft:isSmallScreen?"7vw": "17vw",marginTop:'5vh' }}>
+      <div
+        style={{
+          display: "flex",
+          marginLeft: isSmallScreen ? "7vw" : "17vw",
+          marginTop: "5vh",
+        }}
+      >
         <div
           style={{
             display: "flex",
@@ -236,7 +247,11 @@ function Question() {
                                 }}
                                 onClick={() => {
                                   dispatch(deleteQuestion(id, navigate));
-                                  dispatch(setGlobalAlert("Question deleted successfully"));
+                                  dispatch(
+                                    setGlobalAlert(
+                                      "Question deleted successfully"
+                                    )
+                                  );
                                 }}
                               >
                                 delete
@@ -245,11 +260,6 @@ function Question() {
                           </div>
                           <div>
                             <p>Asked {moment(item.askedOn).fromNow()}</p>
-                            <Avatar
-                              style={{ display: "flex", alignItems: "center" }}
-                            >
-                              {item?.userPosted?.charAt(0).toUpperCase()}
-                            </Avatar>
                             <div style={{ paddingLeft: "10px" }}>
                               {item.userPosted}
                             </div>
@@ -268,7 +278,6 @@ function Question() {
                     </section>
                     <h3>{item.noOfAnswers} answers</h3>
                     <section>
-                    
                       {item.answer.map((ans) => {
                         return (
                           <div
@@ -332,7 +341,11 @@ function Question() {
                                     }}
                                     onClick={() => {
                                       dispatch(deleteAnswer(item._id, ans._id));
-                                      dispatch(setGlobalAlert("Answer deleted successfully"));
+                                      dispatch(
+                                        setGlobalAlert(
+                                          "Answer deleted successfully"
+                                        )
+                                      );
                                     }}
                                   >
                                     delete
@@ -349,15 +362,7 @@ function Question() {
                                 >
                                   answered {moment(ans.answeredOn).fromNow()}
                                 </p>
-                                <Avatar
-                                  style={{
-                                    textDecoration: "none",
-                                    fontSize: "14px",
-                                    margin: "0%",
-                                  }}
-                                >
-                                  {ans.userAnswered.charAt(0).toUpperCase()}
-                                </Avatar>
+                                
                                 <div>{ans.userAnswered}</div>
                               </div>
                             </div>
@@ -377,9 +382,11 @@ function Question() {
               width: "calc( 100% - 300px - 24px )",
             }}
           >
-             {alertMessage?.data && <Alert type="success" Children={alertMessage?.data} />}
+            {alertMessage?.data && (
+              <Alert type="success" Children={alertMessage?.data} />
+            )}
             <h1>Your Answer</h1>
-           
+
             <form onSubmit={handleSubmit}>
               <textarea
                 style={{

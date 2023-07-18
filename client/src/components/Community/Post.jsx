@@ -99,7 +99,7 @@ function Post({ children }) {
               border: "1px solid black",
             }}
             alt="profile PIC"
-            src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${children?.avatar}`}
+            src={children?.avatar}
           />
           <strong style={{color:'black'}}>{children?.userPosted}</strong>
         </div>
@@ -137,7 +137,7 @@ function Post({ children }) {
                 width:"70%"
               }}
               
-              src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${file}`}
+              src={file}
               controls
               autoPlay
               alt="video"
@@ -154,7 +154,7 @@ function Post({ children }) {
               }}
               
               //height="90vh"
-              src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${file}`}
+              src={file}
               alt="img"
             />
           )

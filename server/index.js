@@ -33,6 +33,8 @@ const upload = multer({ storage, fileFilter });
 import dotenv from "dotenv";
 dotenv.config();
 const app = express();
+import fileupload from "express-fileupload";
+app.use(fileupload({useTempFiles: true}));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

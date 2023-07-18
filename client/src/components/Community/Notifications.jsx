@@ -83,7 +83,7 @@ function Notification() {
                         border: "1px solid grey",
                       }}
                       alt="profile PIC"
-                      src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${notification?.avatar}`}
+                      src={notification?.avatar}
                     />
                     <strong style={{ marginRight: "10px" }}>
                       {notification.name}
@@ -124,7 +124,7 @@ function Notification() {
                         border: "1px solid grey",
                       }}
                       alt="profile PIC"
-                      src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${notification?.avatar}`}
+                      src={notification?.avatar}
                     />
                     <strong style={{ marginRight: "10px" }}>
                       {notification.name}
@@ -165,7 +165,7 @@ function Notification() {
                         border: "1px solid grey",
                       }}
                       alt="profile PIC"
-                      src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${notification?.avatar}`}
+                      src={notification?.avatar}
                     />
                     <strong style={{ marginRight: "10px" }}>
                       {notification.name}
@@ -207,7 +207,7 @@ function Notification() {
                         border: "1px solid grey",
                       }}
                       alt="profile PIC"
-                      src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${notification?.avatar}`}
+                      src={notification?.avatar}
                     />
                     <strong style={{ marginRight: "10px" }}>
                       {notification.name}

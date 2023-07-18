@@ -71,7 +71,7 @@ function Profile() {
                 }}
                 width="50vw"
                 height="60vh"
-                    src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${item?.avatar}`}
+                    src={item?.avatar}
                     alt="avatar"
                   ></img>
                   <div>

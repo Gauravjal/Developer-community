@@ -1,6 +1,6 @@
 import axios from "axios";
 import { fetchAllUsers } from "./getAllUsers";
-import {getCurrentUser} from "./getCurrentUser";
+import { getCurrentUser } from "./getCurrentUser";
 import { setGlobalAlert } from "./alert";
 export const createPost = (postData, history) => async (dispatch) => {
   try {
@@ -20,18 +20,20 @@ export const createPost = (postData, history) => async (dispatch) => {
     history("/community");
     setTimeout(() => {
       dispatch(setGlobalAlert(""));
-    }, 5000); 
+    }, 5000);
   } catch (err) {
     console.log(err);
   }
 };
 
-
 // Action creator for creating a post
 export const uploadFiles = (formData) => async (dispatch) => {
   try {
     console.log(formData);
-    const response = await axios.post("https://stackoverflow-clone-mfrc.onrender.com/community/post/upload", formData);
+    const response = await axios.post(
+      "https://stackoverflow-clone-mfrc.onrender.com/community/post/upload",
+      formData
+    );
     console.log(response.data.files);
     return response.data.files;
     //dispatch({ type: UPLOAD_FILES_SUCCESS, payload: response.data });
@@ -45,7 +47,9 @@ export const uploadFiles = (formData) => async (dispatch) => {
 
 export const fetchPosts = () => async (dispatch) => {
   try {
-    const { data } = await axios.get("https://stackoverflow-clone-mfrc.onrender.com/community/");
+    const { data } = await axios.get(
+      "https://stackoverflow-clone-mfrc.onrender.com/community/"
+    );
 
     dispatch({
       type: "FETCH_POSTS",

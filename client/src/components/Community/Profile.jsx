@@ -95,7 +95,7 @@ function Profile() {
                 }}
                 width="50%"
 
-                src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${user?.avatar}`}
+                src={user?.avatar}
                 alt="avatar"
               />
             ) : (

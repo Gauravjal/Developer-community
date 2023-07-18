@@ -60,7 +60,7 @@ function Search() {
                 width="50vw"
                 style={{ borderRadius: "60%",height:'50%',border:'1px solid grey'}}
                 alt="profile PIC"
-                src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${item?.avatar}`}
+                src={item?.avatar}
               ></img>
               </div>
               <h4

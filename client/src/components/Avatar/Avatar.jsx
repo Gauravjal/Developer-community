@@ -34,7 +34,7 @@ function Avatar({ children }) {
             border: "1px solid grey",
           }}
           // src={file}
-          src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${user?.avatar}`}
+          src={user?.avatar}
           alt="avatar"
         />
       {/* </button> */}

@@ -32,7 +32,7 @@ export const login = (AuthData, history) => async (dispatch) => {
   try {
     dispatch(setGlobalAlert("Loding...."));
     const { data } = await axios.post(
-      "http://localhost:5000/users/login",
+      "https://stackoverflow-clone-mfrc.onrender.com/users/login",
       AuthData
     );
     dispatch({ type: "AUTH", data });

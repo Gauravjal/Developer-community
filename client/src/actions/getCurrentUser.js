@@ -26,7 +26,6 @@ export const updateCurrentUser = (userData) => async (dispatch) => {
 
 export const updateAvatar = (formData,id) => async (dispatch) => {
   try {
-    alert(id);
     console.log("famdata",formData);
     const { data } = await axios.post(
       `https://stackoverflow-clone-mfrc.onrender.com/users/avatar/${id}`,

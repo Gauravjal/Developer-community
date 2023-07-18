@@ -20,15 +20,17 @@ function User() {
         flexDirection: "row",
         flexWrap: "wrap",
         justifyContent: "space-between",
-        
       }}
     >
       <LeftSidebar />
-      <div  className="user-list-container" style={{ marginLeft: "16vw", width: "70vw",marginTop:'10vh' }}>
+      <div
+        className="user-list-container"
+        style={{ marginLeft: "16vw", width: "70vw", marginTop: "10vh" }}
+      >
         {Users?.data?.map((item) => {
           return (
             <div
-            className="user-profile-link"
+              className="user-profile-link"
               style={{
                 marginTop: "10px",
                 width: "200px",
@@ -56,8 +58,13 @@ function User() {
                 to={`/Users/${item._id}`}
               >
                 <img
-                  style={{ width: "50px", height: "10vh" ,border:'1px solid grey',borderRadius:'10px'}}
-                  src={`https://stackoverflow-clone-mfrc.onrender.com/uploads/${item?.avatar}`}
+                  style={{
+                    width: "50px",
+                    height: "10vh",
+                    border: "1px solid grey",
+                    borderRadius: "10px",
+                  }}
+                  src={item?.avatar}
                   alt="img"
                 />
                 <div
