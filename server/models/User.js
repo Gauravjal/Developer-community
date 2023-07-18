@@ -11,14 +11,18 @@ const userSchema = mongoose.Schema({
   joinedOn: { type: Date, default: Date.now },
   followers: [{ type: String, default: [] }],
   following: [{ type: String, default: [] }],
-  avatar: { type: String, default: "files-1688895982592-193750304.png" },
+  avatar: {
+    type: String,
+    default:
+      "https://t3.ftcdn.net/jpg/05/17/79/88/240_F_517798849_WuXhHTpg2djTbfNf0FQAjzFEoluHpnct.jpg",
+  },
   postedQuestions: [{ date: Date, questionId: mongoose.Schema.Types.ObjectId }],
   notifications: [
     {
       date: { type: Date },
       val: { type: String },
       name: { type: String },
-      avatar:{type:String},
+      avatar: { type: String },
     },
   ],
 });
