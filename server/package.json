@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon index.js",
-    "build": "echo 'Backend build step'"
+    "start": "nodemon index.js"
   },
   "author": "Gaurav Jalkote",
   "license": "ISC",
