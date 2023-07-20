@@ -13,7 +13,7 @@ function Chatbot({ showBot, setShowBot }) {
 
   const handleSendMessage = () => {
     // Send user message to the backend
-    fetch("https://stackoverflow-clone-mfrc.onrender.com/chat", {
+    fetch("http://localhost:5000/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +41,6 @@ function Chatbot({ showBot, setShowBot }) {
         display: showBot ? "auto" : "none",
         z: "100",
         backgroundColor: "none",
-        
       }}
     >
       {/* <div
@@ -59,7 +58,7 @@ function Chatbot({ showBot, setShowBot }) {
         style={{ z: "100", backgroundColor: "#fff" }}
         className="chat-container"
       >
-        <div style={{marginTop:'50px'}} className="message-list">
+        <div style={{ marginTop: "50px" }} className="message-list">
           {messages.map((message, index) => (
             <div
               key={index}
@@ -94,7 +93,7 @@ function Chatbot({ showBot, setShowBot }) {
             padding: "5px",
             border: "none",
             cursor: "pointer",
-            fontSize:'30px'
+            fontSize: "30px",
           }}
           onClick={() => setShowBot(false)}
         />
