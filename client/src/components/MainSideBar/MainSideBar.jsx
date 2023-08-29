@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import moment from "moment";
@@ -7,7 +7,7 @@ function MainSideBar() {
   const location = useLocation();
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   var questionList = useSelector((state) => state.question);
-  let alertMessage=useSelector((state)=>state.alert);
+  let alertMessage = useSelector((state) => state.alert);
   console.log(questionList);
   useEffect(() => {
     const checkScreenSize = () => {
@@ -20,8 +20,13 @@ function MainSideBar() {
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
   return (
-    <div style={{ marginLeft: isSmallScreen?"7vw":"14vw", width: "75vw" }} className="main-bar">
-      {alertMessage?.data && <Alert type="success" Children={alertMessage?.data} />}
+    <div
+      style={{ marginLeft: isSmallScreen ? "7vw" : "14vw", width: "75vw" }}
+      className="main-bar"
+    >
+      {alertMessage?.data && (
+        <Alert type="success" Children={alertMessage?.data} />
+      )}
       <div
         style={{
           display: "flex",
@@ -48,7 +53,9 @@ function MainSideBar() {
                 width: "100%",
                 display: "flex",
                 alignItems: "center",
-                backgroundColor: "#fdf7e2",
+               // backgroundColor: "#fdf7e2",
+               
+                backgroundColor: "#ffffff",
                 borderBottom: "solid 1px #edeff0",
               }}
               className="display-question-container"
@@ -57,7 +64,7 @@ function MainSideBar() {
                 <p style={{ margin: "0%", textAlign: "center" }}>
                   {question?.upvotes?.length - question?.downvotes?.length}
                 </p>
-                <p style={{ }}>votes</p>
+                <p style={{}}>votes</p>
               </div>
               <div style={{ padding: "10px" }} className="display-votes-ans">
                 <p style={{ margin: "0%", textAlign: "center" }}>

@@ -34,13 +34,13 @@ function RightSideBar() {
       style={{
         display: "flex",
         flexDirection: "column",
-        flexWrap: "wrap",
+        //flexWrap: "wrap",
         justifyContent: "space-between",
-        height:'85vh',
-        position:'fixed',
-        right:'1vw',
+        height: "85vh",
+        position: "fixed",
+        right: "1vw",
         backgroundColor: "#eef1f4",
-        borderLeft:'1px solid #444',
+        borderLeft: "1px solid #444",
         //overflow:'scroll',
         //overflowX:'hidden',
         //overflowY: "scroll",
@@ -68,11 +68,10 @@ function RightSideBar() {
                 alignItems: "center",
                 padding: "10px",
                 marginRight: "10px",
-                marginLeft:"10px",
+                marginLeft: "10px",
                 justifyContent: "space-between",
                 boxShadow: "red",
-                backgroundColor:"#ffffff",
-                
+                backgroundColor: "#ffffff",
               }}
             >
               <Link
@@ -88,7 +87,11 @@ function RightSideBar() {
                 >
                   <img
                     width="50vw"
-                    style={{ borderRadius: "60%", height: "50%" ,border:'1px solid grey'}}
+                    style={{
+                      borderRadius: "60%",
+                      height: "50%",
+                      border: "1px solid grey",
+                    }}
                     alt="profile PIC"
                     src={item?.avatar}
                   ></img>
@@ -118,7 +121,7 @@ function RightSideBar() {
                       height: "25%",
                       borderRadius: "20px",
                       paddingBottom: "none",
-                      backgroundColor:"#4187f6"
+                      backgroundColor: "#4187f6",
                     }}
                   >
                     Follow

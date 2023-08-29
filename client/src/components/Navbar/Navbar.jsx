@@ -32,16 +32,10 @@ const Navbar = () => {
       <div className="navbar">
         <div className="navbar-1">
           <Link to="/" className="nav-item nav-logo">
-            <img src={logo} alt="logo" />
+            <img height="50px"  src={logo} alt="logo" />
           </Link>
           <Link to="/" className="nav-item nav-btn res-nav">
             About
-          </Link>
-          <Link to="/" className="nav-item nav-btn res-nav">
-            Products
-          </Link>
-          <Link to="/" className="nav-item nav-btn res-nav">
-            For Teams
           </Link>
           <form>
             <input type="text" placeholder="Search..." />

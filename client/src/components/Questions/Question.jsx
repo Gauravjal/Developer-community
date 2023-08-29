@@ -122,6 +122,8 @@ function Question() {
                         marginBottom: "20px",
                         paddingBottom: "20px",
                         borderBottom: "solid 1px rgba(0, 0, 0, 0.112)",
+                        padding: "20px",
+                        backgroundColor:'#fff'
                       }}
                       className="question-details-container"
                     >
@@ -282,8 +284,10 @@ function Question() {
                         return (
                           <div
                             style={{
-                              paddingBottom: "20px",
+                              
+                              padding: "20px",
                               borderBottom: "solid 1px rgba(0, 0, 0, 0.112)",
+                              backgroundColor:'#fff'
                             }}
                             className="display-ans"
                             key={ans._id}
@@ -362,7 +366,7 @@ function Question() {
                                 >
                                   answered {moment(ans.answeredOn).fromNow()}
                                 </p>
-                                
+
                                 <div>{ans.userAnswered}</div>
                               </div>
                             </div>
