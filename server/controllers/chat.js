@@ -50,14 +50,15 @@ import axios from "axios";
 // };
 
 export const chatBot = async (req, res) => {
-  try {
+  // try {
     const userMessage = req.body.message;
 
     const response = await axios.post(
-      "https://api.writesonic.com/v1/botsonic/botsonic/generate/9512d132-4124-470d-b890-eddbac30a84a",
+      "https://api.botsonic.ai/v1/botsonic/generate",
+      //"https://api.writesonic.com/v1/botsonic/botsonic/generate/9512d132-4124-470d-b890-eddbac30a84a",
       // '{"question": "How to develop these skills?", "chat_history": []}',
       {
-        question: userMessage,
+        input_text: userMessage,
         chat_history: [],
       },
       {
@@ -67,15 +68,17 @@ export const chatBot = async (req, res) => {
           "Content-Type": "application/json",
           "User-Agent": "python-requests/2.28.1",
           accept: "application/json",
-          token: "00fde142-9299-4dcc-8e60-425d568b3180",
+          token:"d45f3838-38a3-48a5-b659-d9a8d42b122c",
+          //token: "00fde142-9299-4dcc-8e60-425d568b3180",
         },
       }
     );
-    console.log(response.data[0].data.answer);
-    res.json({ response: response.data[0].data.answer });
-  } catch (err) {
-    console.log(err.message);
-    console.log("This was an error message");
+    console.log(response.data);
+    // console.log(response.data[0].data.answer);
+    // res.json({ response: response.data[0].data.answer });
+  // } catch (err) {
+    // console.log(err.message);
+    // console.log("This was an error message");
     //     res.status(500).json({ error: "Failed to generate chatbot response" });
-  }
+  // }
 };
