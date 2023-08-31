@@ -13,7 +13,7 @@ function Chatbot({ showBot, setShowBot }) {
 
   const handleSendMessage = () => {
     // Send user message to the backend
-    fetch("https://stackoverflow-clone-mfrc.onrender.com/chat", {
+    fetch("http://localhost:5000/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
